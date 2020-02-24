@@ -1,5 +1,5 @@
 //
-//  TiledImageView.h
+//  ImageScrollView.h
 //  LoadLargeImage
 //
 //  Created by dcjt on 2018/12/18.
@@ -10,8 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TiledImageView : UIView
-- (void)xt_setImage:(UIImage *)image scale:(CGFloat)scale ;
+@interface SHMLargeImgScroll : UIScrollView
+
+- (void)setupImage:(UIImage *)img ;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

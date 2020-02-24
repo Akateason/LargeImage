@@ -21,8 +21,8 @@
 		EE17DCA921C9E83E006937B8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EE17DCA821C9E83E006937B8 /* main.m */; };
 		EE17DCB321C9E83E006937B8 /* LargeImageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EE17DCB221C9E83E006937B8 /* LargeImageTests.m */; };
 		EE17DCBE21C9E83E006937B8 /* LargeImageUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = EE17DCBD21C9E83E006937B8 /* LargeImageUITests.m */; };
-		EE17DCCF21C9E85A006937B8 /* TiledImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE17DCCC21C9E85A006937B8 /* TiledImageView.m */; };
-		EE17DCD021C9E85A006937B8 /* ImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE17DCCE21C9E85A006937B8 /* ImageScrollView.m */; };
+		EE17DCCF21C9E85A006937B8 /* SHMTiledLargeImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE17DCCC21C9E85A006937B8 /* SHMTiledLargeImageView.m */; };
+		EE17DCD021C9E85A006937B8 /* SHMLargeImgScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = EE17DCCE21C9E85A006937B8 /* SHMLargeImgScroll.m */; };
 		EE17DCD221C9E85F006937B8 /* bigbig.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EE17DCD121C9E85F006937B8 /* bigbig.jpg */; };
 /* End PBXBuildFile section */
 
@@ -72,10 +72,10 @@
 		EE17DCB921C9E83E006937B8 /* LargeImageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LargeImageUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE17DCBD21C9E83E006937B8 /* LargeImageUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LargeImageUITests.m; sourceTree = "<group>"; };
 		EE17DCBF21C9E83E006937B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EE17DCCB21C9E859006937B8 /* ImageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageScrollView.h; sourceTree = "<group>"; };
-		EE17DCCC21C9E85A006937B8 /* TiledImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TiledImageView.m; sourceTree = "<group>"; };
-		EE17DCCD21C9E85A006937B8 /* TiledImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiledImageView.h; sourceTree = "<group>"; };
-		EE17DCCE21C9E85A006937B8 /* ImageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageScrollView.m; sourceTree = "<group>"; };
+		EE17DCCB21C9E859006937B8 /* SHMLargeImgScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHMLargeImgScroll.h; sourceTree = "<group>"; };
+		EE17DCCC21C9E85A006937B8 /* SHMTiledLargeImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHMTiledLargeImageView.m; sourceTree = "<group>"; };
+		EE17DCCD21C9E85A006937B8 /* SHMTiledLargeImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHMTiledLargeImageView.h; sourceTree = "<group>"; };
+		EE17DCCE21C9E85A006937B8 /* SHMLargeImgScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHMLargeImgScroll.m; sourceTree = "<group>"; };
 		EE17DCD121C9E85F006937B8 /* bigbig.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bigbig.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,10 +120,10 @@
 				8F063EA92403D436004898F7 /* SDWebImageExtension */,
 				8F063EA1240387F9004898F7 /* SHMTiledLayer.h */,
 				8F063EA2240387F9004898F7 /* SHMTiledLayer.m */,
-				EE17DCCB21C9E859006937B8 /* ImageScrollView.h */,
-				EE17DCCE21C9E85A006937B8 /* ImageScrollView.m */,
-				EE17DCCD21C9E85A006937B8 /* TiledImageView.h */,
-				EE17DCCC21C9E85A006937B8 /* TiledImageView.m */,
+				EE17DCCB21C9E859006937B8 /* SHMLargeImgScroll.h */,
+				EE17DCCE21C9E85A006937B8 /* SHMLargeImgScroll.m */,
+				EE17DCCD21C9E85A006937B8 /* SHMTiledLargeImageView.h */,
+				EE17DCCC21C9E85A006937B8 /* SHMTiledLargeImageView.m */,
 			);
 			path = LargeImage;
 			sourceTree = "<group>";
@@ -389,9 +389,9 @@
 				EE17DCA921C9E83E006937B8 /* main.m in Sources */,
 				8F063EB22403D463004898F7 /* SDWebImageDownloader+largeImage.m in Sources */,
 				EE17DC9B21C9E83D006937B8 /* AppDelegate.m in Sources */,
-				EE17DCCF21C9E85A006937B8 /* TiledImageView.m in Sources */,
+				EE17DCCF21C9E85A006937B8 /* SHMTiledLargeImageView.m in Sources */,
 				8F063EB12403D463004898F7 /* SDWebImageManager+largeImage.m in Sources */,
-				EE17DCD021C9E85A006937B8 /* ImageScrollView.m in Sources */,
+				EE17DCD021C9E85A006937B8 /* SHMLargeImgScroll.m in Sources */,
 				8F063EA3240387FA004898F7 /* SHMTiledLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -565,13 +565,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5D74XHX7AD;
 				INFOPLIST_FILE = LargeImage/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = gpy.LargeImage;
+				PRODUCT_BUNDLE_IDENTIFIER = com.teason.gpy.LargeImage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -583,13 +584,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5D74XHX7AD;
 				INFOPLIST_FILE = LargeImage/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = gpy.LargeImage;
+				PRODUCT_BUNDLE_IDENTIFIER = com.teason.gpy.LargeImage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

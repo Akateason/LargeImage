@@ -6,22 +6,22 @@
 //  Copyright © 2018 dcjt. All rights reserved.
 //
 
-#import "TiledImageView.h"
+#import "SHMTiledLargeImageView.h"
 #import "SHMTiledLayer.h"
 
-@interface TiledImageView ()
+@interface SHMTiledLargeImageView ()
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, assign) CGRect imageRect;
 @property (nonatomic, assign) CGFloat imageScale;
 @end
 
-@implementation TiledImageView
+@implementation SHMTiledLargeImageView
 
 + (Class)layerClass {
     return [SHMTiledLayer class];
 }
 
-- (void)xt_setImage:(UIImage *)image scale:(CGFloat)scale {
+- (void)setImage:(UIImage *)image scale:(CGFloat)scale {
     self.image = image;
     _imageRect = CGRectMake(0.0f, 0.0f,
                             CGImageGetWidth(self.image.CGImage),

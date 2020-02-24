@@ -7,13 +7,13 @@
 //
 
 #import "ViewController.h"
-#import "ImageScrollView.h"
-#import "TiledImageView.h"
+#import "SHMLargeImgScroll.h"
+#import "SHMTiledLargeImageView.h"
 
 
 
 @interface ViewController ()
-@property (nonatomic, strong) ImageScrollView *scrollView;
+@property (nonatomic, strong) SHMLargeImgScroll *imgScroll;
 @end
 
 @implementation ViewController
@@ -28,8 +28,9 @@
     NSData *dataImage = UIImageJPEGRepresentation(image, .3);
     image = [UIImage imageWithData:dataImage];
     
-    self.scrollView = [[ImageScrollView alloc] initWithFrame:self.view.bounds image:image];
-    [self.view addSubview:self.scrollView];
+    self.imgScroll = [[SHMLargeImgScroll alloc] initWithFrame:self.view.bounds];
+    [self.imgScroll setupImage:image];
+    [self.view addSubview:self.imgScroll];
     
     
     
