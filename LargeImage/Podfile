@@ -5,8 +5,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 
 target 'LargeImage' do
-  pod 'SDWebImage'
-#,'4.3.3'
+  pod 'SDWebImage','4.3.3'
   
   
   pod 'XTBase'

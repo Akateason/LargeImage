@@ -43,9 +43,9 @@ PODS:
   - MJRefresh (3.3.1)
   - ReactiveObjC (3.1.1)
   - RSKImageCropper (2.2.3)
-  - SDWebImage (5.5.2):
-    - SDWebImage/Core (= 5.5.2)
-  - SDWebImage/Core (5.5.2)
+  - SDWebImage (4.3.3):
+    - SDWebImage/Core (= 4.3.3)
+  - SDWebImage/Core (4.3.3)
   - SSZipArchive (2.2.2)
   - SVProgressHUD (2.2.5)
   - UIFontWDCustomLoader (0.1.0)
@@ -92,7 +92,7 @@ PODS:
   - YYModel (1.0.4)
 
 DEPENDENCIES:
-  - SDWebImage
+  - SDWebImage (= 4.3.3)
   - XTBase
   - XTlib
   - XTlib/CustomUIs
@@ -134,7 +134,7 @@ SPEC CHECKSUMS:
   MJRefresh: eeda70fbf0ad277f3178cef1cd0c3532591d6237
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
   RSKImageCropper: a446db0e8444a036b34f3c43db01b2373baa4b2a
-  SDWebImage: 4d5c027c935438f341ed33dbac53ff9f479922ca
+  SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
   SSZipArchive: fa16b8cc4cdeceb698e5e5d9f67e9558532fbf23
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   UIFontWDCustomLoader: 233f0f83e543b8f24a6299d7fc773be9d704fe22
@@ -148,6 +148,6 @@ SPEC CHECKSUMS:
   XTTable: 71154f0f7e883546d83a3b377f919369fc7d1ece
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: bc40d00fad64dbd0a8db5821559bd33d9f49fba1
+PODFILE CHECKSUM: 35541b85ff2a3e7492dce249b12a26bfd8314e9a
 
 COCOAPODS: 1.8.4
