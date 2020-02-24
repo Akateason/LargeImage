@@ -1,0 +1,24 @@
+
+
+
+source 'https://github.com/CocoaPods/Specs.git'
+
+
+target 'LargeImage' do
+  pod 'SDWebImage'
+#,'4.3.3'
+  
+  
+  pod 'XTBase'
+  pod 'XTlib'
+#  pod 'XTlib/Animations'
+  pod 'XTlib/CustomUIs'
+#  pod 'XTIAP'
+  
+#  pod 'XTBase',:path => '../../teason_project/XTBase/'
+#  pod 'XTlib',:path => '../../teason_project/XTlib/'
+##  pod 'XTlib/Animations',:path => '../../teason_project/XTlib/'
+#  pod 'XTlib/CustomUIs',:path => '../../teason_project/XTlib/'
+##  pod 'XTIAP',:path => '../XTIAP/'
+  
+end

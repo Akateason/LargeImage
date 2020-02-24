@@ -1,0 +1,1 @@
+../../../XTlib/XTlib/XTlib/Components/CustomUIs/ParallaxHeaderView/UIImage+ImageEffects.h

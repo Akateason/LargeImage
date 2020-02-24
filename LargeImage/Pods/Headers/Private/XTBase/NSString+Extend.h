@@ -1,0 +1,1 @@
+../../../XTBase/XTBase/XTBase/Utils/Foundation/NSString+Extend.h

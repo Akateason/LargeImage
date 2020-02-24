@@ -1,0 +1,1 @@
+../../../XTlib/XTlib/XTlib/Components/CustomUIs/XTPhotoAlbum/XTPAConfig.h

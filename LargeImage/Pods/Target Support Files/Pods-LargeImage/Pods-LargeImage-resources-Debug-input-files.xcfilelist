@@ -1,0 +1,12 @@
+${PODS_ROOT}/Target Support Files/Pods-LargeImage/Pods-LargeImage-resources.sh
+${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle
+${PODS_ROOT}/RSKImageCropper/RSKImageCropper/RSKImageCropperStrings.bundle
+${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle
+${PODS_ROOT}/XTColor/XTColor/color/XTColors.plist
+${PODS_ROOT}/XTlib/XTlib/XTlib/Components/CustomUIs/XTPhotoAlbum/source/ab_select@2x.png
+${PODS_ROOT}/XTlib/XTlib/XTlib/Components/CustomUIs/XTPhotoAlbum/source/ab_selected@2x.png
+${PODS_ROOT}/XTlib/XTlib/XTlib/Components/CustomUIs/XTPhotoAlbum/source/ab_t_icon@2x.png
+${PODS_ROOT}/XTlib/XTlib/XTlib/Components/CustomUIs/XTSegment/btBase.png
+${PODS_ROOT}/XTlib/XTlib/XTlib/Components/CustomUIs/XTPhotoAlbum/album/XTPAlbumCell.xib
+${PODS_ROOT}/XTlib/XTlib/XTlib/Components/CustomUIs/XTPhotoAlbum/cameraGroup/XTPACameraGroupCell.xib
+${PODS_ROOT}/XTlib/XTlib/XTlib/Components/CustomUIs/XTStretchSegment/XTStretchSegCell.xib
