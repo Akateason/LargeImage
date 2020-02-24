@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ImageScrollView : UIScrollView
--(id)initWithFrame:(CGRect)frame image:(UIImage*)img;
+- (id)initWithFrame:(CGRect)frame image:(UIImage*)img;
 @end
 
 NS_ASSUME_NONNULL_END

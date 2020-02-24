@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 #import "ImageScrollView.h"
+#import "TiledImageView.h"
+//#import "YPLargeImageView.h"
 
 @interface ViewController ()
 @property (nonatomic, strong) ImageScrollView *scrollView;
@@ -27,10 +29,29 @@
     //            }
     //        });
     //    });
-    UIImage *iamge = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"bigbig" ofType:@"jpg"]];
-    self.scrollView = [[ImageScrollView alloc] initWithFrame:self.view.bounds image:iamge];
+    
+
+//    UIImage *image = [UIImage imageNamed:@"bigbig.jpg"];
+    UIImage *image = [UIImage imageNamed:@"1.png"];
+    NSData *dataImage = UIImageJPEGRepresentation(image, .3);
+    image = [UIImage imageWithData:dataImage];
+    
+    self.scrollView = [[ImageScrollView alloc] initWithFrame:self.view.bounds image:image];
     [self.view addSubview:self.scrollView];
+    
+    
+//    TiledImageView *imgView = [[TiledImageView alloc] initWithFrame:self.view.bounds];
+//    [self.view addSubview:imgView];
+//    [imgView xt_setImage:[UIImage imageNamed:@"1.png"] scale:0.029];
+    
     // Do any additional setup after loading the view, typically from a nib.
+    
+    
+//    YPLargeImageView *view = [[YPLargeImageView alloc] initWithFrame:self.view.bounds];
+//    [view yp_setImageName:@"1.png"];
+//    [self.view addSubview:view];
+    
+    
 }
 
 

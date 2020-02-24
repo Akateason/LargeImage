@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F063EA0240380CF004898F7 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F063E9F240380CF004898F7 /* 1.png */; };
+		8F063EA3240387FA004898F7 /* SHMTiledLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F063EA2240387F9004898F7 /* SHMTiledLayer.m */; };
 		EE17DC9B21C9E83D006937B8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE17DC9A21C9E83D006937B8 /* AppDelegate.m */; };
 		EE17DC9E21C9E83D006937B8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE17DC9D21C9E83D006937B8 /* ViewController.m */; };
 		EE17DCA121C9E83D006937B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE17DC9F21C9E83D006937B8 /* Main.storyboard */; };
@@ -38,6 +40,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8F063E9F240380CF004898F7 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		8F063EA1240387F9004898F7 /* SHMTiledLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHMTiledLayer.h; sourceTree = "<group>"; };
+		8F063EA2240387F9004898F7 /* SHMTiledLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHMTiledLayer.m; sourceTree = "<group>"; };
 		EE17DC9621C9E83D006937B8 /* LargeImage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LargeImage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE17DC9921C9E83D006937B8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EE17DC9A21C9E83D006937B8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -113,6 +118,8 @@
 				EE17DC9A21C9E83D006937B8 /* AppDelegate.m */,
 				EE17DC9C21C9E83D006937B8 /* ViewController.h */,
 				EE17DC9D21C9E83D006937B8 /* ViewController.m */,
+				8F063EA1240387F9004898F7 /* SHMTiledLayer.h */,
+				8F063EA2240387F9004898F7 /* SHMTiledLayer.m */,
 				EE17DCCB21C9E859006937B8 /* ImageScrollView.h */,
 				EE17DCCE21C9E85A006937B8 /* ImageScrollView.m */,
 				EE17DCCD21C9E85A006937B8 /* TiledImageView.h */,
@@ -122,6 +129,7 @@
 				EE17DCA421C9E83E006937B8 /* LaunchScreen.storyboard */,
 				EE17DCA721C9E83E006937B8 /* Info.plist */,
 				EE17DCA821C9E83E006937B8 /* main.m */,
+				8F063E9F240380CF004898F7 /* 1.png */,
 				EE17DCD121C9E85F006937B8 /* bigbig.jpg */,
 			);
 			path = LargeImage;
@@ -250,6 +258,7 @@
 			files = (
 				EE17DCA621C9E83E006937B8 /* LaunchScreen.storyboard in Resources */,
 				EE17DCD221C9E85F006937B8 /* bigbig.jpg in Resources */,
+				8F063EA0240380CF004898F7 /* 1.png in Resources */,
 				EE17DCA321C9E83E006937B8 /* Assets.xcassets in Resources */,
 				EE17DCA121C9E83D006937B8 /* Main.storyboard in Resources */,
 			);
@@ -281,6 +290,7 @@
 				EE17DC9B21C9E83D006937B8 /* AppDelegate.m in Sources */,
 				EE17DCCF21C9E85A006937B8 /* TiledImageView.m in Sources */,
 				EE17DCD021C9E85A006937B8 /* ImageScrollView.m in Sources */,
+				8F063EA3240387FA004898F7 /* SHMTiledLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,7 +396,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -439,7 +449,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -453,13 +463,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = LargeImage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = gpy.LargeImage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -469,13 +480,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = LargeImage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = gpy.LargeImage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

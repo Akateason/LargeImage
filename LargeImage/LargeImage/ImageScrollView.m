@@ -17,7 +17,7 @@
 
 @implementation ImageScrollView
 
--(id)initWithFrame:(CGRect)frame image:(UIImage*)img {
+- (id)initWithFrame:(CGRect)frame image:(UIImage*)img {
     if((self = [super initWithFrame:frame])) {
         // Set up the UIScrollView
         self.showsVerticalScrollIndicator = NO;
@@ -30,23 +30,25 @@
         // 根据图片实际尺寸和屏幕尺寸计算图片视图的尺寸
         self.image = img;
         CGRect imageRect = CGRectMake(0.0f,0.0f,CGImageGetWidth(self.image.CGImage),CGImageGetHeight(self.image.CGImage));
-        _imageScale = self.frame.size.width/imageRect.size.width;
+        CGFloat scaleW = self.frame.size.width / imageRect.size.width ;
+        CGFloat scaleH = self.frame.size.height / imageRect.size.height ;
+        _imageScale = MIN(scaleH, scaleW);
         imageRect.size = CGSizeMake(
-                                    imageRect.size.width*_imageScale,
-                                    imageRect.size.height*_imageScale);
+                                    imageRect.size.width * _imageScale,
+                                    imageRect.size.height * _imageScale);
         //根据图片的缩放计算scrollview的缩放级别
         // 图片相对于视图放大了1/imageScale倍，所以用log2(1/imageScale)得出缩放次数，
-        // 然后通过pow得出缩放倍数，至于为什么要加1，
-        // 是希望图片在放大到原图比例时，还可以继续放大一次（即2倍），可以看的更清晰
-        int level = ceil(log2(1/_imageScale))+1;
+        int level = ceil(log2(1 / _imageScale)) ;
         CGFloat zoomOutLevels = 1;
         CGFloat zoomInLevels = pow(2, level);
         
-        self.maximumZoomScale =zoomInLevels;
+        self.maximumZoomScale = zoomInLevels;
         self.minimumZoomScale = zoomOutLevels;
         
-        self.tiledView = [[TiledImageView alloc] initWithFrame:imageRect image:self.image scale:self.imageScale];
+        self.tiledView = [[TiledImageView alloc] initWithFrame:imageRect];
+        [self.tiledView xt_setImage:img scale:_imageScale] ;
         [self addSubview:self.tiledView];
+        [self scrollViewDidZoom:self];
     }
     return self;
 }
@@ -55,10 +57,7 @@
     return self.tiledView;
 }
 
-// We use layoutSubviews to center the image in the view
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    // center the image as it becomes smaller than the size of the screen
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
     CGSize boundsSize = self.bounds.size;
     CGRect frameToCenter = self.tiledView.frame;
     // center horizontally

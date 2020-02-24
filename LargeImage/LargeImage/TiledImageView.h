@@ -11,9 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TiledImageView : UIView
-
--(id)initWithFrame:(CGRect)frame image:(UIImage*)img scale:(CGFloat)scale;
-
+- (void)xt_setImage:(UIImage *)image scale:(CGFloat)scale ;
 @end
 
 NS_ASSUME_NONNULL_END
