@@ -12,6 +12,9 @@
 		8F063EB02403D463004898F7 /* SDImageCache+largeImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F063EAC2403D463004898F7 /* SDImageCache+largeImage.m */; };
 		8F063EB12403D463004898F7 /* SDWebImageManager+largeImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F063EAD2403D463004898F7 /* SDWebImageManager+largeImage.m */; };
 		8F063EB22403D463004898F7 /* SDWebImageDownloader+largeImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F063EAF2403D463004898F7 /* SDWebImageDownloader+largeImage.m */; };
+		8F063EC52404CEC3004898F7 /* SHMPhotoBrowserVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F063EC12404CEC3004898F7 /* SHMPhotoBrowserVC.m */; };
+		8F063EC62404CEC3004898F7 /* SHMPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F063EC22404CEC3004898F7 /* SHMPhotoBrowser.m */; };
+		8F063EC72404CEC3004898F7 /* SHMPhotoBrowserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F063EC32404CEC3004898F7 /* SHMPhotoBrowserCell.m */; };
 		D4C06B6BFB04F061CF4DA733 /* libPods-LargeImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BCC0B8D5869A8CB394E3438F /* libPods-LargeImage.a */; };
 		EE17DC9B21C9E83D006937B8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE17DC9A21C9E83D006937B8 /* AppDelegate.m */; };
 		EE17DC9E21C9E83D006937B8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE17DC9D21C9E83D006937B8 /* ViewController.m */; };
@@ -55,6 +58,12 @@
 		8F063EAD2403D463004898F7 /* SDWebImageManager+largeImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SDWebImageManager+largeImage.m"; sourceTree = "<group>"; };
 		8F063EAE2403D463004898F7 /* SDWebImageDownloader+largeImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SDWebImageDownloader+largeImage.h"; sourceTree = "<group>"; };
 		8F063EAF2403D463004898F7 /* SDWebImageDownloader+largeImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SDWebImageDownloader+largeImage.m"; sourceTree = "<group>"; };
+		8F063EBF2404CEC3004898F7 /* SHMPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHMPhotoBrowser.h; sourceTree = "<group>"; };
+		8F063EC02404CEC3004898F7 /* SHMPhotoBrowserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHMPhotoBrowserCell.h; sourceTree = "<group>"; };
+		8F063EC12404CEC3004898F7 /* SHMPhotoBrowserVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHMPhotoBrowserVC.m; sourceTree = "<group>"; };
+		8F063EC22404CEC3004898F7 /* SHMPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHMPhotoBrowser.m; sourceTree = "<group>"; };
+		8F063EC32404CEC3004898F7 /* SHMPhotoBrowserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHMPhotoBrowserCell.m; sourceTree = "<group>"; };
+		8F063EC42404CEC3004898F7 /* SHMPhotoBrowserVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHMPhotoBrowserVC.h; sourceTree = "<group>"; };
 		BCC0B8D5869A8CB394E3438F /* libPods-LargeImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LargeImage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE17DC9621C9E83D006937B8 /* LargeImage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LargeImage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE17DC9921C9E83D006937B8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -139,14 +148,27 @@
 		8F063EB32404BA71004898F7 /* Render */ = {
 			isa = PBXGroup;
 			children = (
-				8F063EA1240387F9004898F7 /* SHMTiledLayer.h */,
-				8F063EA2240387F9004898F7 /* SHMTiledLayer.m */,
 				EE17DCCB21C9E859006937B8 /* SHMLargeImgScroll.h */,
 				EE17DCCE21C9E85A006937B8 /* SHMLargeImgScroll.m */,
 				EE17DCCD21C9E85A006937B8 /* SHMTiledLargeImageView.h */,
 				EE17DCCC21C9E85A006937B8 /* SHMTiledLargeImageView.m */,
+				8F063EA1240387F9004898F7 /* SHMTiledLayer.h */,
+				8F063EA2240387F9004898F7 /* SHMTiledLayer.m */,
 			);
 			path = Render;
+			sourceTree = "<group>";
+		};
+		8F063EBE2404CEC3004898F7 /* PhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				8F063EC42404CEC3004898F7 /* SHMPhotoBrowserVC.h */,
+				8F063EC12404CEC3004898F7 /* SHMPhotoBrowserVC.m */,
+				8F063EBF2404CEC3004898F7 /* SHMPhotoBrowser.h */,
+				8F063EC22404CEC3004898F7 /* SHMPhotoBrowser.m */,
+				8F063EC02404CEC3004898F7 /* SHMPhotoBrowserCell.h */,
+				8F063EC32404CEC3004898F7 /* SHMPhotoBrowserCell.m */,
+			);
+			path = PhotoBrowser;
 			sourceTree = "<group>";
 		};
 		ACB244F16246DA6C01837F73 /* Frameworks */ = {
@@ -186,6 +208,7 @@
 				EE17DC9A21C9E83D006937B8 /* AppDelegate.m */,
 				EE17DC9C21C9E83D006937B8 /* ViewController.h */,
 				EE17DC9D21C9E83D006937B8 /* ViewController.m */,
+				8F063EBE2404CEC3004898F7 /* PhotoBrowser */,
 				8F063EA82403D428004898F7 /* LargeImage */,
 				EE17DC9F21C9E83D006937B8 /* Main.storyboard */,
 				EE17DCA221C9E83E006937B8 /* Assets.xcassets */,
@@ -395,11 +418,14 @@
 				8F063EB02403D463004898F7 /* SDImageCache+largeImage.m in Sources */,
 				EE17DC9E21C9E83D006937B8 /* ViewController.m in Sources */,
 				EE17DCA921C9E83E006937B8 /* main.m in Sources */,
+				8F063EC62404CEC3004898F7 /* SHMPhotoBrowser.m in Sources */,
+				8F063EC52404CEC3004898F7 /* SHMPhotoBrowserVC.m in Sources */,
 				8F063EB22403D463004898F7 /* SDWebImageDownloader+largeImage.m in Sources */,
 				EE17DC9B21C9E83D006937B8 /* AppDelegate.m in Sources */,
 				EE17DCCF21C9E85A006937B8 /* SHMTiledLargeImageView.m in Sources */,
 				8F063EB12403D463004898F7 /* SDWebImageManager+largeImage.m in Sources */,
 				EE17DCD021C9E85A006937B8 /* SHMLargeImgScroll.m in Sources */,
+				8F063EC72404CEC3004898F7 /* SHMPhotoBrowserCell.m in Sources */,
 				8F063EA3240387FA004898F7 /* SHMTiledLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
