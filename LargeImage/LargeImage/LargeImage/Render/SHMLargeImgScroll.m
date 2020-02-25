@@ -10,14 +10,13 @@
 #import "SHMTiledLargeImageView.h"
 
 @interface SHMLargeImgScroll ()<UIScrollViewDelegate>
-@property (nonatomic, strong) UIImage *image;
-@property (nonatomic) CGFloat imageScale;
-@property (nonatomic, strong) SHMTiledLargeImageView *tiledView;
+@property (nonatomic, strong)    UIImage                *image;
+@property (nonatomic, strong)    SHMTiledLargeImageView *tiledView;
 @end
 
 @implementation SHMLargeImgScroll
 
-#pragma mark -
+#pragma mark - life
 
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -41,22 +40,20 @@
     CGRect imageRect = CGRectMake(0.0f,0.0f,CGImageGetWidth(self.image.CGImage),CGImageGetHeight(self.image.CGImage));
     CGFloat scaleW = self.frame.size.width / imageRect.size.width ;
     CGFloat scaleH = self.frame.size.height / imageRect.size.height ;
-    _imageScale = MIN(scaleH, scaleW) ;
-    imageRect.size = CGSizeMake(imageRect.size.width * _imageScale,
-                                imageRect.size.height * _imageScale) ;
-    
-    
-    
+    CGFloat imageScale = MIN(scaleH, scaleW) ;
+    imageRect.size = CGSizeMake(imageRect.size.width * imageScale,
+                                imageRect.size.height * imageScale) ;
+            
     // 根据图片的缩放计算scrollview的缩放级别
     // 图片相对于视图放大了1/imageScale倍，所以用log2(1/imageScale)得出缩放次数，
-    int level = ceil(log2(1 / _imageScale)) ;
+    int level = ceil(log2(1 / imageScale)) ;
     CGFloat zoomOutLevels = 1;
     CGFloat zoomInLevels = pow(2, level);
     
     self.maximumZoomScale = zoomInLevels;
     self.minimumZoomScale = zoomOutLevels;
 
-    [self.tiledView setImage:img scale:_imageScale] ;
+    [self.tiledView setImage:img scale:imageScale] ;
     self.tiledView.frame = imageRect;
     [self setupTiledViewFrame];
 }
@@ -74,6 +71,7 @@
 
 
 #pragma mark -
+
 - (void)setupTiledViewFrame {
     CGSize boundsSize = self.bounds.size;
     CGRect frameToCenter = self.tiledView.frame;

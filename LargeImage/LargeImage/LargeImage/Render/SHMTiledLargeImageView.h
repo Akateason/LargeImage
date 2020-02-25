@@ -11,6 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SHMTiledLargeImageView : UIView
+@property (nonatomic, strong) UIImage   *image;
+@property (nonatomic, assign) CGFloat   imageScale;
+
+
 - (void)setImage:(UIImage *)image scale:(CGFloat)scale ;
 @end
 

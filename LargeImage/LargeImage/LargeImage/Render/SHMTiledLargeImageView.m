@@ -10,9 +10,7 @@
 #import "SHMTiledLayer.h"
 
 @interface SHMTiledLargeImageView ()
-@property (nonatomic, strong) UIImage *image;
-@property (nonatomic, assign) CGRect imageRect;
-@property (nonatomic, assign) CGFloat imageScale;
+@property (nonatomic, assign) CGRect    imageRect;
 @end
 
 @implementation SHMTiledLargeImageView

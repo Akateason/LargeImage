@@ -117,13 +117,8 @@
 		8F063EA82403D428004898F7 /* LargeImage */ = {
 			isa = PBXGroup;
 			children = (
+				8F063EB32404BA71004898F7 /* Render */,
 				8F063EA92403D436004898F7 /* SDWebImageExtension */,
-				8F063EA1240387F9004898F7 /* SHMTiledLayer.h */,
-				8F063EA2240387F9004898F7 /* SHMTiledLayer.m */,
-				EE17DCCB21C9E859006937B8 /* SHMLargeImgScroll.h */,
-				EE17DCCE21C9E85A006937B8 /* SHMLargeImgScroll.m */,
-				EE17DCCD21C9E85A006937B8 /* SHMTiledLargeImageView.h */,
-				EE17DCCC21C9E85A006937B8 /* SHMTiledLargeImageView.m */,
 			);
 			path = LargeImage;
 			sourceTree = "<group>";
@@ -139,6 +134,19 @@
 				8F063EAF2403D463004898F7 /* SDWebImageDownloader+largeImage.m */,
 			);
 			path = SDWebImageExtension;
+			sourceTree = "<group>";
+		};
+		8F063EB32404BA71004898F7 /* Render */ = {
+			isa = PBXGroup;
+			children = (
+				8F063EA1240387F9004898F7 /* SHMTiledLayer.h */,
+				8F063EA2240387F9004898F7 /* SHMTiledLayer.m */,
+				EE17DCCB21C9E859006937B8 /* SHMLargeImgScroll.h */,
+				EE17DCCE21C9E85A006937B8 /* SHMLargeImgScroll.m */,
+				EE17DCCD21C9E85A006937B8 /* SHMTiledLargeImageView.h */,
+				EE17DCCC21C9E85A006937B8 /* SHMTiledLargeImageView.m */,
+			);
+			path = Render;
 			sourceTree = "<group>";
 		};
 		ACB244F16246DA6C01837F73 /* Frameworks */ = {
