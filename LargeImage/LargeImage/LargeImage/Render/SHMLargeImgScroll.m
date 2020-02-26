@@ -80,7 +80,7 @@
         }
             break;
         case SDImageFormatPNG: {
-            //TODO: 判断是否需要 压缩
+            //TODO: 分片压缩
             @weakify(self)
             [self compressBigPngIfNeeded:image data:data complete:^(UIImage *image) {
                 @strongify(self)
@@ -135,20 +135,9 @@
     CGFloat scale = [info.first floatValue];
     int lev = ceil(log2(1 / scale)); //缩放次数
     if (lev >= 4) {
-        
-        if (completion) completion(image);
-        
-//        [SHMLargeImageCompressUtil downsize:image complete:^(UIImage * _Nonnull image1) {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                if (completion) completion(image1);
-//            });
-//        }] ;
-//        UIImage *imgCompressed = [SHMLargeImageCompressUtil thumbnailForAsset:data maxPixelSize:4];
-        
-//        UIImage *imgCompressed = [SHMLargeImageCompressUtil scaledImageFromData:data width:APP_WIDTH * 6] ;
-//        if (completion) completion(imgCompressed);
-        
-        
+        UIImage *imgCompressed = [SHMLargeImageCompressUtil scaledImageFromData:data width:APP_WIDTH * (lev+1)] ;
+        if (completion) completion(imgCompressed);
+                
     } else {
         if (completion) completion(image);
     }

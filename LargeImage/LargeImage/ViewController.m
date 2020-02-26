@@ -57,7 +57,10 @@
     @weakify(self)
     [self.view bk_whenTapped:^{
         @strongify(self)
-        SHMPhotoBrowserVC *vc = [SHMPhotoBrowserVC setup:@[@"https://images.smcdn.cn/uIy0hOzBugkx18kH/IMG_0049.PNG!original"]];
+        SHMPhotoBrowserVC *vc = [SHMPhotoBrowserVC setup:@[
+            @"https://images.smcdn.cn/tWHH7Ncg6NEydnYL/IMG_0312.GIF!original",
+//            @"https://images.smcdn.cn/uIy0hOzBugkx18kH/IMG_0049.PNG!original"
+        ]];
         [self presentViewController:vc animated:YES completion:nil];
 
     }];

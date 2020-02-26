@@ -189,11 +189,14 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
 
 + (UIImage *)scaledImageFromData:(NSData *)data width:(CGFloat)width  {
     CFDataRef dataRef = (__bridge CFDataRef)data;
-    CGImageSourceRef source = CGImageSourceCreateWithData(dataRef, nil);
+    CFDictionaryRef dataOpt = (__bridge CFDictionaryRef) @{(id) kCGImageSourceShouldCache : @NO} ;
+    CGImageSourceRef source = CGImageSourceCreateWithData(dataRef, dataOpt);
     CFRelease(dataRef);
+    
     CFDictionaryRef options = (__bridge CFDictionaryRef) @{
                                                            (id) kCGImageSourceCreateThumbnailWithTransform : @YES,
-                                                           (id) kCGImageSourceCreateThumbnailFromImageIfAbsent : @YES,
+//                                                           (id) kCGImageSourceShouldCacheImmediately: @YES,
+                                                           (id) kCGImageSourceCreateThumbnailFromImageAlways : @YES,
                                                            (id) kCGImageSourceThumbnailMaxPixelSize : @(width)
                                                            };
     CGImageRef scaledImageRef = CGImageSourceCreateThumbnailAtIndex(source, 0, options);
