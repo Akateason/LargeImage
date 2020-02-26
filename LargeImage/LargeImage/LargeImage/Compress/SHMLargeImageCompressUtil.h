@@ -16,11 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)downsize:(nullable UIImage *)sourceImage complete:(void(^)(UIImage *image))completion ;
 
 
-+ (UIImage *)thumbnailForAsset:(NSData *)assetData maxPixelSize:(NSUInteger)size ;
+
     
 
 
-+ (UIImage *)scaledImageFrom:(NSURL *)imageUrl width:(CGFloat)width ;
+
 + (UIImage *)scaledImageFromData:(NSData *)data width:(CGFloat)width ;
 
 @end

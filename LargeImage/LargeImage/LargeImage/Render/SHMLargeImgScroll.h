@@ -8,13 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "SHMTiledLargeImageView.h"
+#import <FLAnimatedImageView+WebCache.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SHMLargeImgScroll : UIScrollView
 @property (nonatomic, strong)    SHMTiledLargeImageView *largeImgView;
+@property (nonatomic, strong)    FLAnimatedImageView    *imageView;
 
-- (void)setupImage:(UIImage *)img ;
+- (void)setupImage:(UIImage *)img;
 @end
 
 NS_ASSUME_NONNULL_END

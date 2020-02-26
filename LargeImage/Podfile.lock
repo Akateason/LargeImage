@@ -36,6 +36,7 @@ PODS:
     - CocoaLumberjack/Core (= 3.6.1)
   - CocoaLumberjack/Core (3.6.1)
   - FDFullscreenPopGesture (1.1)
+  - FLAnimatedImage (1.0.12)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
@@ -46,6 +47,9 @@ PODS:
   - SDWebImage (4.3.3):
     - SDWebImage/Core (= 4.3.3)
   - SDWebImage/Core (4.3.3)
+  - SDWebImage/GIF (4.3.3):
+    - FLAnimatedImage (~> 1.0)
+    - SDWebImage/Core
   - SSZipArchive (2.2.2)
   - SVProgressHUD (2.2.5)
   - UIFontWDCustomLoader (0.1.0)
@@ -92,7 +96,9 @@ PODS:
   - YYModel (1.0.4)
 
 DEPENDENCIES:
+  - FLAnimatedImage (~> 1.0)
   - SDWebImage (= 4.3.3)
+  - SDWebImage/GIF
   - XTBase
   - XTlib
   - XTlib/CustomUIs
@@ -104,6 +110,7 @@ SPEC REPOS:
     - CHTCollectionViewWaterfallLayout
     - CocoaLumberjack
     - FDFullscreenPopGesture
+    - FLAnimatedImage
     - FMDB
     - Masonry
     - MJRefresh
@@ -129,6 +136,7 @@ SPEC CHECKSUMS:
   CHTCollectionViewWaterfallLayout: 5f241d2480ab4939aa0d1ad4981de9eef1fbe60d
   CocoaLumberjack: b17ae15142558d08bbacf69775fa10c4abbebcc9
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
+  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJRefresh: eeda70fbf0ad277f3178cef1cd0c3532591d6237
@@ -148,6 +156,6 @@ SPEC CHECKSUMS:
   XTTable: 71154f0f7e883546d83a3b377f919369fc7d1ece
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 35541b85ff2a3e7492dce249b12a26bfd8314e9a
+PODFILE CHECKSUM: 061913d66566902bfc269fc0b40fddeda442cc9e
 
 COCOAPODS: 1.8.4

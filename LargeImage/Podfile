@@ -6,7 +6,8 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target 'LargeImage' do
   pod 'SDWebImage','4.3.3'
-  
+  pod 'SDWebImage/GIF'
+  pod 'FLAnimatedImage', '~> 1.0'
   
   pod 'XTBase'
   pod 'XTlib'

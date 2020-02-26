@@ -29,7 +29,10 @@
         
         self.largeImgView = [[SHMTiledLargeImageView alloc] initWithFrame:self.bounds];
         [self addSubview:self.largeImgView];
-        self.largeImgView.delegate = self ;
+        self.largeImgView.delegate = self;
+        
+        self.imageView = [[FLAnimatedImageView alloc] initWithFrame:self.bounds];
+        [self addSubview:self.imageView];
     }
     return self;
 }
@@ -37,6 +40,9 @@
 
 
 - (void)setupLargeImage:(UIImage *)img {
+    self.imageView.hidden = YES;
+    self.largeImgView.hidden = NO;
+    
     RACTuple *info = [self infoFromImage:img];
     RACTupleUnpack(NSNumber *scaleNum, NSValue *rectVal) = info ;
     CGFloat imageScale = scaleNum.floatValue;
@@ -58,7 +64,18 @@
 
 // TODO . sd 方法 . gif 加载等
 - (void)setupSDRender:(UIImage *)image {
-//    self.
+    self.imageView.hidden = NO;
+    self.largeImgView.hidden = YES;
+    
+    self.imageView.image = image;
+}
+
+- (void)setupGifData:(NSData *)data {
+    self.imageView.hidden = NO;
+    self.largeImgView.hidden = YES;
+    
+    FLAnimatedImage *aImage = [FLAnimatedImage animatedImageWithGIFData:data];
+    self.imageView.animatedImage = aImage;
 }
 
 #pragma mark - scrollview
@@ -80,7 +97,6 @@
         }
             break;
         case SDImageFormatPNG: {
-            //TODO: 分片压缩
             @weakify(self)
             [self compressBigPngIfNeeded:image data:data complete:^(UIImage *image) {
                 @strongify(self)
@@ -88,8 +104,10 @@
             }];
         }
             break;
-            
-        case SDImageFormatGIF:
+        case SDImageFormatGIF: {
+            [self setupGifData:data];
+        }
+            break;
         case SDImageFormatTIFF:
         case SDImageFormatWebP:
         case SDImageFormatHEIC:
@@ -133,11 +151,11 @@
                       complete:(void(^)(UIImage *image))completion {
     RACTuple *info = [self infoFromImage:image];
     CGFloat scale = [info.first floatValue];
-    int lev = ceil(log2(1 / scale)); //缩放次数
+    int lev = ceil(log2(1 / scale));
     if (lev >= 4) {
+        //TODO: 分片压缩
         UIImage *imgCompressed = [SHMLargeImageCompressUtil scaledImageFromData:data width:APP_WIDTH * (lev+1)] ;
         if (completion) completion(imgCompressed);
-                
     } else {
         if (completion) completion(image);
     }
