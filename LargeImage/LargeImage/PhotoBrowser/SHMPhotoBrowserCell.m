@@ -42,7 +42,7 @@
 - (void)setUrlStr:(NSString *)urlStr {
     _urlStr = urlStr;
     
-    [self.imgScroll.largeImgView setImgUrlString:urlStr];
+    [self.imgScroll setImgUrlString:urlStr];
 }
 
 

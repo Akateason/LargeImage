@@ -16,6 +16,8 @@
 #import <BlocksKit/UIView+BlocksKit.h>
 #import <SDWebImage/SDWebImageManager.h>
 
+#import "WebImgModel.h"
+
 
 @interface ViewController ()
 @property (nonatomic, strong) SHMLargeImgScroll *imgScroll;
@@ -26,13 +28,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSArray *urls =
-    @[
-    @"https://images.smcdn.cn/uIy0hOzBugkx18kH/IMG_0049.PNG!original",
-    @"https://images.smcdn.cn/Ge2tGGPo4AYOEYt7/IMG_0051.PNG!original"
-    @"https://images.smcdn.cn/tWHH7Ncg6NEydnYL/IMG_0312.GIF!original",
-    @"https://img2018.cnblogs.com/blog/1449510/201905/1449510-20190520125900956-1796872904.png",
-    ];
+    NSArray *urls = [WebImgModel fakelist];
+
 
     
 
@@ -57,11 +54,7 @@
     @weakify(self)
     [self.view bk_whenTapped:^{
         @strongify(self)
-        SHMPhotoBrowserVC *vc = [SHMPhotoBrowserVC setup:@[
-            @"https://img2018.cnblogs.com/blog/1449510/201905/1449510-20190520125900956-1796872904.png",
-//            @"https://images.smcdn.cn/tWHH7Ncg6NEydnYL/IMG_0312.GIF!original",
-//            @"https://images.smcdn.cn/uIy0hOzBugkx18kH/IMG_0049.PNG!original"
-        ]];
+        SHMPhotoBrowserVC *vc = [SHMPhotoBrowserVC setup:urls];
         [self presentViewController:vc animated:YES completion:nil];
 
     }];

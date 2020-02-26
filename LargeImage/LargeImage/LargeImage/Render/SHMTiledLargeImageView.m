@@ -18,44 +18,6 @@
 
 
 
-- (void)setImgUrlString:(NSString *)urlString {
-    UIActivityIndicatorView *aiView   = [UIActivityIndicatorView new];
-    aiView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
-    aiView.center                     = self.center;
-    [self addSubview:aiView];
-    [aiView startAnimating];
-    
-    @weakify(self)
-    [[SDWebImageManager sharedManagerForLargeImage] loadImageWithURL:[NSURL URLWithString:urlString]
-                                                             options:SDWebImageScaleDownLargeImages
-                                                            progress:nil
-                                                           completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
-
-        @strongify(self)
-        SDImageFormat format = [NSData sd_imageFormatForImageData:data];
-        
-        if (self.delegate && [self.delegate respondsToSelector:@selector(imageDownloadFinished:data:sdFormat:)]) [self.delegate imageDownloadFinished:image data:data sdFormat:format] ;
-        
-        [aiView stopAnimating];
-        [aiView removeFromSuperview];
-    }];
-
-    
-//    [self.imageView sd_setImageWithURL:[NSURL URLWithString:urlString]
-//                      placeholderImage:nil
-//                               options:SDWebImageAvoidDecodeImage
-//                              progress:nil
-//                             completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-//        @strongify(self)
-//        [self setupWhenImageFetched:image];
-//        [aiView stopAnimating];
-//        [aiView removeFromSuperview];
-//        self.blkLoadComplete();
-//    }];
-
-    
-}
-
 
 - (void)setImage:(UIImage *)image scale:(CGFloat)scale {
     self.image = image;

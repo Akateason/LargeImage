@@ -9,6 +9,7 @@
 #import "SHMPhotoBrowserVC.h"
 #import "SHMPhotoBrowser.h"
 #import <Masonry/Masonry.h>
+#import "WebImgModel.h"
 
 @interface SHMPhotoBrowserVC ()
 
@@ -16,15 +17,15 @@
 
 @implementation SHMPhotoBrowserVC
 
-+ (instancetype)setup:(NSArray <NSString *> *)urls {
-    SHMPhotoBrowserVC *vc = [[SHMPhotoBrowserVC alloc] initWithUrls:urls];
++ (instancetype)setup:(NSArray <WebImgModel *> *)webImages {
+    SHMPhotoBrowserVC *vc = [[SHMPhotoBrowserVC alloc] initWithUrls:webImages];
     return vc;
 }
 
-- (instancetype)initWithUrls:(NSArray *)urls {
+- (instancetype)initWithUrls:(NSArray *)webImages {
     self = [super init];
     if (self) {
-        self.urls = urls;
+        self.webImages = webImages;
     }
     return self;
 }
@@ -35,7 +36,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.pb = [[SHMPhotoBrowser alloc] initWithUrlStrs:self.urls];
+    self.pb = [[SHMPhotoBrowser alloc] initWithWebImgs:self.webImages];
     [self.view addSubview:self.pb];
     [self.pb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);

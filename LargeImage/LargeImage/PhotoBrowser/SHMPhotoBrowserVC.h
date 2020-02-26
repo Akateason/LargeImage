@@ -7,14 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-@class SHMPhotoBrowser;
+
+@class SHMPhotoBrowser,WebImgModel;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SHMPhotoBrowserVC : UIViewController
-@property (copy, nonatomic) NSArray <NSString *> *urls ;
+@property (copy, nonatomic) NSArray <WebImgModel *> *webImages ;
 @property (strong, nonatomic) SHMPhotoBrowser *pb ;
-+ (instancetype)setup:(NSArray <NSString *> *)urls ;
++ (instancetype)setup:(NSArray <WebImgModel *> *)webImages ;
 @end
 
 NS_ASSUME_NONNULL_END

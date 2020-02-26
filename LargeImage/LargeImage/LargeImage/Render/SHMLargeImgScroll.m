@@ -12,6 +12,7 @@
 #import <XTlib/XTlib.h>
 
 @interface SHMLargeImgScroll ()<UIScrollViewDelegate, SHMTiledLargeImageViewDelegate>
+//@property (nonatomic) BOOL doubleClicked ;
 @end
 
 @implementation SHMLargeImgScroll
@@ -26,20 +27,16 @@
         self.decelerationRate = UIScrollViewDecelerationRateFast;
         self.delegate = self;
         self.backgroundColor = [UIColor blackColor];
+        [self setupGesture];
         
-        self.largeImgView = [[SHMTiledLargeImageView alloc] initWithFrame:self.bounds];
-        [self addSubview:self.largeImgView];
-        self.largeImgView.delegate = self;
-        
-        self.imageView = [[FLAnimatedImageView alloc] initWithFrame:self.bounds];
-        [self addSubview:self.imageView];
+        [self largeImgView];
+        [self imageView];
     }
     return self;
 }
 
-
-
 - (void)setupLargeImage:(UIImage *)img {
+    [self clear];
     self.imageView.hidden = YES;
     self.largeImgView.hidden = NO;
     
@@ -59,23 +56,70 @@
 
     [self.largeImgView setImage:img scale:imageScale] ;
     self.largeImgView.frame = imageRect;
-    [self setuplargeImgViewFrame];
+    [self resetScrollToOrigin];
 }
 
-// TODO . sd 方法 . gif 加载等
 - (void)setupSDRender:(UIImage *)image {
+    [self clear];
     self.imageView.hidden = NO;
     self.largeImgView.hidden = YES;
+    self.maximumZoomScale = 3;
+    self.minimumZoomScale = 1;
     
     self.imageView.image = image;
+    [self resetScrollToOrigin];
 }
 
 - (void)setupGifData:(NSData *)data {
+    [self clear];
     self.imageView.hidden = NO;
     self.largeImgView.hidden = YES;
+    self.maximumZoomScale = 3;
+    self.minimumZoomScale = 1;
     
     FLAnimatedImage *aImage = [FLAnimatedImage animatedImageWithGIFData:data];
     self.imageView.animatedImage = aImage;
+    [self resetScrollToOrigin];
+}
+
+- (void)clear {
+    self.imageView.animatedImage = nil;
+    self.imageView.image = nil;
+        
+    self.largeImgView.image = nil;
+}
+
+- (void)resetScrollToOrigin {
+    self.zoomScale = 1;
+    [self setuplargeImgViewFrame];
+    self.imageView.frame = self.bounds;
+    [self scrollRectToVisible:self.bounds animated:NO];
+}
+
+
+#pragma mark - gesture
+
+- (void)setupGesture {
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+    [self addGestureRecognizer:tap];
+
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTap:)];
+    doubleTap.numberOfTapsRequired = 2;
+    [self addGestureRecognizer:doubleTap];
+    [tap requireGestureRecognizerToFail:doubleTap];
+}
+
+- (void)tap:(UITapGestureRecognizer *)tapGetrue {}
+
+static const float kSIDE_ZOOMTORECT = 80.0f;
+- (void)doubleTap:(UITapGestureRecognizer *)tapGesture {
+    if (self.zoomScale == 1) {
+        CGPoint point = [tapGesture locationInView:self];
+        [self zoomToRect:CGRectMake(point.x - kSIDE_ZOOMTORECT / 2, point.y - kSIDE_ZOOMTORECT / 2, kSIDE_ZOOMTORECT, kSIDE_ZOOMTORECT) animated:YES];
+    } else {
+        [self setZoomScale:1 animated:YES];
+        [self resetScrollToOrigin];
+    }
 }
 
 #pragma mark - scrollview
@@ -86,45 +130,31 @@
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
     [self setuplargeImgViewFrame];
+    self.imageView.frame = self.largeImgView.frame;
 }
 
-#pragma mark - SHMTiledLargeImageViewDelegate <NSObject>
 
-- (void)imageDownloadFinished:(UIImage *)image data:(NSData *)data sdFormat:(SDImageFormat)format {
-    switch (format) {
-        case SDImageFormatJPEG: {
-            [self setupLargeImage:image];
-        }
-            break;
-        case SDImageFormatPNG: {
-            @weakify(self)
-            [self compressBigPngIfNeeded:image data:data complete:^(UIImage *image) {
-                @strongify(self)
-                [self setupLargeImage:image];
-            }];
-        }
-            break;
-        case SDImageFormatGIF: {
-            [self setupGifData:data];
-        }
-            break;
-        case SDImageFormatTIFF:
-        case SDImageFormatWebP:
-        case SDImageFormatHEIC:
-        case SDImageFormatUndefined: {
-            //TODO: render other
-            [self setupSDRender:image] ;
-        }
-            break;
-        default:
-            break;
+#pragma mark - p
+
+- (SHMTiledLargeImageView *)largeImgView {
+    if (!_largeImgView) {
+        _largeImgView = [[SHMTiledLargeImageView alloc] initWithFrame:self.bounds];
+        if (!_largeImgView.superview) [self addSubview:_largeImgView];
+        _largeImgView.delegate = self;
     }
-    
-    
+    return _largeImgView;
 }
 
+- (FLAnimatedImageView *)imageView {
+    if (!_imageView) {
+        _imageView = [[FLAnimatedImageView alloc] initWithFrame:self.bounds];
+        _imageView.contentMode = UIViewContentModeScaleAspectFit;
+        if (!_imageView.superview) [self addSubview:_imageView];
+    }
+    return _imageView;
+}
 
-#pragma mark -
+#pragma mark - util
 
 - (void)setuplargeImgViewFrame {
     CGSize boundsSize = self.bounds.size;
@@ -132,13 +162,12 @@
     // center horizontally
     if (frameToCenter.size.width < boundsSize.width)
         frameToCenter.origin.x = (boundsSize.width - frameToCenter.size.width) / 2;
-    else
-        frameToCenter.origin.x = 0;
+    else frameToCenter.origin.x = 0;
     // center vertically
     if (frameToCenter.size.height < boundsSize.height)
         frameToCenter.origin.y = (boundsSize.height - frameToCenter.size.height) / 2;
-    else
-        frameToCenter.origin.y = 0;
+    else frameToCenter.origin.y = 0;
+    
     self.largeImgView.frame = frameToCenter;
     // to handle the interaction between CATiledLayer and high resolution screens, we need to manually set the
     // tiling view's contentScaleFactor to 1.0. (If we omitted this, it would be 2.0 on high resolution screens,
@@ -172,5 +201,58 @@
     imageRect.size = CGSizeMake(imageRect.size.width * imageScale, imageRect.size.height * imageScale) ;
     return RACTuplePack(@(imageScale),@(imageRect));
 }
+
+- (void)setImgUrlString:(NSString *)urlString {
+    UIActivityIndicatorView *aiView   = [UIActivityIndicatorView new];
+    aiView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+    aiView.center                     = self.center;
+    [self addSubview:aiView];
+    [aiView startAnimating];
+    
+    @weakify(self)
+    [[SDWebImageManager sharedManagerForLargeImage] loadImageWithURL:[NSURL URLWithString:urlString]
+                                                             options:SDWebImageScaleDownLargeImages
+                                                            progress:nil
+                                                           completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+
+        @strongify(self)
+        SDImageFormat format = [NSData sd_imageFormatForImageData:data];
+        [self imageDownloadFinished:image data:data sdFormat:format] ;
+        
+        [aiView stopAnimating];
+        [aiView removeFromSuperview];
+    }];
+}
+
+- (void)imageDownloadFinished:(UIImage *)image data:(NSData *)data sdFormat:(SDImageFormat)format {
+    switch (format) {
+        case SDImageFormatJPEG: {
+            [self setupLargeImage:image];
+        }
+            break;
+        case SDImageFormatPNG: {
+            @weakify(self)
+            [self compressBigPngIfNeeded:image data:data complete:^(UIImage *image) {
+                @strongify(self)
+                [self setupLargeImage:image];
+            }];
+        }
+            break;
+        case SDImageFormatGIF: {
+            [self setupGifData:data];
+        }
+            break;
+        case SDImageFormatTIFF:
+        case SDImageFormatWebP:
+        case SDImageFormatHEIC:
+        case SDImageFormatUndefined: {
+            [self setupSDRender:image] ;
+        }
+            break;
+        default:
+            break;
+    }
+}
+
 
 @end

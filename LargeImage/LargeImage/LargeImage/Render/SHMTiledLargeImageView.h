@@ -11,7 +11,7 @@
 #import <UIImageView+WebCache.h>
 #import <NSData+ImageContentType.h>
 
-NS_ASSUME_NONNULL_BEGIN
+
 
 @protocol SHMTiledLargeImageViewDelegate <NSObject>
 - (void)imageDownloadFinished:(UIImage *)image data:(NSData *)data sdFormat:(SDImageFormat)format;
@@ -26,8 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setImage:(UIImage *)image scale:(CGFloat)scale ;
 
-- (void)setImgUrlString:(NSString *)urlString ;
+
 
 @end
 
-NS_ASSUME_NONNULL_END
+

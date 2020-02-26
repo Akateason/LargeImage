@@ -32,9 +32,8 @@ static const CGFloat kTileTotalPixels = kSourceImageTileSizeMB * kPixelsPerMB;
 
 static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to overlap the seems where tiles meet.
 
-
-
-
+//分片压缩
+//TODO 解决内存问题
 + (void)downsize:(nullable UIImage *)sourceImage complete:(void(^)(UIImage *image))completion {
     // 创建NSAutoreleasePool
     @autoreleasepool {
@@ -170,7 +169,7 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
 
 
 
-//imageIO
+//  imageIO compress
 + (UIImage *)scaledImageFromData:(NSData *)data width:(CGFloat)width  {
     CFDataRef dataRef = (__bridge CFDataRef)data;
     CFDictionaryRef dataOpt = (__bridge CFDictionaryRef) @{(id) kCGImageSourceShouldCache : @NO} ;

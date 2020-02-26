@@ -12,11 +12,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SHMLargeImgScroll : UIScrollView
-@property (nonatomic, strong)    SHMTiledLargeImageView *largeImgView;
-@property (nonatomic, strong)    FLAnimatedImageView    *imageView;
+typedef NS_ENUM(NSUInteger, SHMLargeImgScrollDisplayMode) {
+    SHMLargeImgScrollDisplayMode_thumbnail,
+    SHMLargeImgScrollDisplayMode_origin,
+};
 
-- (void)setupImage:(UIImage *)img;
+@interface SHMLargeImgScroll : UIScrollView
+@property (nonatomic, strong)    SHMTiledLargeImageView         *largeImgView;
+@property (nonatomic, strong)    FLAnimatedImageView            *imageView;
+@property (nonatomic)            SHMLargeImgScrollDisplayMode   displayMode;
+
+//TODO: param model
+- (void)setImgUrlString:(NSString *)urlString;
+
 @end
 
 NS_ASSUME_NONNULL_END

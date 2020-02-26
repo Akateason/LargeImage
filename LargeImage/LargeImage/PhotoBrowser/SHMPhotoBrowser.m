@@ -11,7 +11,7 @@
 #import <ReactiveObjC/ReactiveObjC.h>
 #import "XTlib.h"
 #import "SHMPhotoBrowserCell.h"
-
+#import "WebImgModel.h"
 
 @interface SHMPhotoBrowser () <UICollectionViewDelegate,UICollectionViewDataSource>
 @property (strong, nonatomic) UICollectionView *collectionView;
@@ -23,14 +23,15 @@
 
 #pragma mark -
 
-- (instancetype)initWithUrlStrs:(NSArray <NSString *> *)urlStrs {
+- (instancetype)initWithWebImgs:(NSArray <WebImgModel *> *)models {
     self = [super init];
     if (self) {
-        self.datas = urlStrs;
+        self.datas = models;
         self.collectionView = ({
             UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
             layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-            layout.minimumLineSpacing = layout.minimumInteritemSpacing = 0;
+            layout.minimumLineSpacing = 0;
+            layout.minimumInteritemSpacing = 0;
             layout.itemSize = CGSizeMake(APP_WIDTH, APP_HEIGHT);
             
             UICollectionView *v = [[UICollectionView alloc] initWithFrame:APPFRAME collectionViewLayout:layout] ;
@@ -46,8 +47,6 @@
         });
         
         [self.collectionView registerClass:[SHMPhotoBrowserCell class] forCellWithReuseIdentifier:@"SHMPhotoBrowserCell"];
-        
-        
     }
     return self;
 }
@@ -61,16 +60,14 @@
     return self.datas.count;
 }
 
-// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     SHMPhotoBrowserCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SHMPhotoBrowserCell" forIndexPath:indexPath];
     cell.backgroundColor = [UIColor blueColor];
-    cell.urlStr = self.datas[indexPath.row];
+    WebImgModel *model = self.datas[indexPath.row];
+    //TODO: 切换
+    cell.urlStr = model.image;
     xt_LOG_DEBUG(@"加载第%@张",@(indexPath.row+1));
-    
-    
     return cell;
 }
-
 
 @end

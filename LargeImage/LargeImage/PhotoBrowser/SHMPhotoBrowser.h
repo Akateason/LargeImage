@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class WebImgModel;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SHMPhotoBrowser : UIView
-- (instancetype)initWithUrlStrs:(NSArray <NSString *> *)urlStrs ;
+- (instancetype)initWithWebImgs:(NSArray <WebImgModel *> *)models;
 @end
 
 NS_ASSUME_NONNULL_END
