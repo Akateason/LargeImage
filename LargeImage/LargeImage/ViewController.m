@@ -37,18 +37,18 @@
     
 
 //    clear sd
-    [SDWebImageManager.sharedManager.imageCache clearMemory];
-    [SDWebImageManager.sharedManager.imageCache clearDiskOnCompletion:^{
-        
-    }];
+//    [SDWebImageManager.sharedManager.imageCache clearMemory];
+//    [SDWebImageManager.sharedManager.imageCache clearDiskOnCompletion:^{
+//
+//    }];
     
     
     
     
 //    UIImage *image = [UIImage imageNamed:@"bigbig.jpg"];
-    UIImage *image = [UIImage imageNamed:@"1.png"];
-    NSData *dataImage = UIImageJPEGRepresentation(image, .3);
-    image = [UIImage imageWithData:dataImage];
+//    UIImage *image = [UIImage imageNamed:@"1.png"];
+//    NSData *dataImage = UIImageJPEGRepresentation(image, .3);
+//    image = [UIImage imageWithData:dataImage];
     
 //    self.imgScroll = [[SHMLargeImgScroll alloc] initWithFrame:self.view.bounds];
 //    [self.imgScroll setupImage:image];

@@ -32,17 +32,14 @@
                                                            completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
 
         @strongify(self)
-        
         SDImageFormat format = [NSData sd_imageFormatForImageData:data];
         
-        if (self.delegate && [self.delegate respondsToSelector:@selector(imageDownloadFinished:sdFormat:)]) [self.delegate imageDownloadFinished:image sdFormat:format] ;
+        if (self.delegate && [self.delegate respondsToSelector:@selector(imageDownloadFinished:data:sdFormat:)]) [self.delegate imageDownloadFinished:image data:data sdFormat:format] ;
         
         [aiView stopAnimating];
         [aiView removeFromSuperview];
     }];
 
-    
-    
     
 //    [self.imageView sd_setImageWithURL:[NSURL URLWithString:urlString]
 //                      placeholderImage:nil
@@ -56,6 +53,7 @@
 //        self.blkLoadComplete();
 //    }];
 
+    
 }
 
 

@@ -15,6 +15,7 @@
 		8F063EC52404CEC3004898F7 /* SHMPhotoBrowserVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F063EC12404CEC3004898F7 /* SHMPhotoBrowserVC.m */; };
 		8F063EC62404CEC3004898F7 /* SHMPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F063EC22404CEC3004898F7 /* SHMPhotoBrowser.m */; };
 		8F063EC72404CEC3004898F7 /* SHMPhotoBrowserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F063EC32404CEC3004898F7 /* SHMPhotoBrowserCell.m */; };
+		8F77A9522405038800B6DD03 /* SHMLargeImageCompressUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F77A9512405038800B6DD03 /* SHMLargeImageCompressUtil.m */; };
 		D4C06B6BFB04F061CF4DA733 /* libPods-LargeImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BCC0B8D5869A8CB394E3438F /* libPods-LargeImage.a */; };
 		EE17DC9B21C9E83D006937B8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE17DC9A21C9E83D006937B8 /* AppDelegate.m */; };
 		EE17DC9E21C9E83D006937B8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE17DC9D21C9E83D006937B8 /* ViewController.m */; };
@@ -64,6 +65,8 @@
 		8F063EC22404CEC3004898F7 /* SHMPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHMPhotoBrowser.m; sourceTree = "<group>"; };
 		8F063EC32404CEC3004898F7 /* SHMPhotoBrowserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHMPhotoBrowserCell.m; sourceTree = "<group>"; };
 		8F063EC42404CEC3004898F7 /* SHMPhotoBrowserVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHMPhotoBrowserVC.h; sourceTree = "<group>"; };
+		8F77A9502405038800B6DD03 /* SHMLargeImageCompressUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHMLargeImageCompressUtil.h; sourceTree = "<group>"; };
+		8F77A9512405038800B6DD03 /* SHMLargeImageCompressUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHMLargeImageCompressUtil.m; sourceTree = "<group>"; };
 		BCC0B8D5869A8CB394E3438F /* libPods-LargeImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LargeImage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE17DC9621C9E83D006937B8 /* LargeImage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LargeImage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE17DC9921C9E83D006937B8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -126,6 +129,7 @@
 		8F063EA82403D428004898F7 /* LargeImage */ = {
 			isa = PBXGroup;
 			children = (
+				8F77A94F2405035D00B6DD03 /* Compress */,
 				8F063EB32404BA71004898F7 /* Render */,
 				8F063EA92403D436004898F7 /* SDWebImageExtension */,
 			);
@@ -169,6 +173,15 @@
 				8F063EC32404CEC3004898F7 /* SHMPhotoBrowserCell.m */,
 			);
 			path = PhotoBrowser;
+			sourceTree = "<group>";
+		};
+		8F77A94F2405035D00B6DD03 /* Compress */ = {
+			isa = PBXGroup;
+			children = (
+				8F77A9502405038800B6DD03 /* SHMLargeImageCompressUtil.h */,
+				8F77A9512405038800B6DD03 /* SHMLargeImageCompressUtil.m */,
+			);
+			path = Compress;
 			sourceTree = "<group>";
 		};
 		ACB244F16246DA6C01837F73 /* Frameworks */ = {
@@ -420,6 +433,7 @@
 				EE17DCA921C9E83E006937B8 /* main.m in Sources */,
 				8F063EC62404CEC3004898F7 /* SHMPhotoBrowser.m in Sources */,
 				8F063EC52404CEC3004898F7 /* SHMPhotoBrowserVC.m in Sources */,
+				8F77A9522405038800B6DD03 /* SHMLargeImageCompressUtil.m in Sources */,
 				8F063EB22403D463004898F7 /* SDWebImageDownloader+largeImage.m in Sources */,
 				EE17DC9B21C9E83D006937B8 /* AppDelegate.m in Sources */,
 				EE17DCCF21C9E85A006937B8 /* SHMTiledLargeImageView.m in Sources */,

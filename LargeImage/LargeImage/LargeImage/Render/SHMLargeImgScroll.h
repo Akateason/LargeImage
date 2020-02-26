@@ -15,7 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong)    SHMTiledLargeImageView *largeImgView;
 
 - (void)setupImage:(UIImage *)img ;
-
 @end
 
 NS_ASSUME_NONNULL_END

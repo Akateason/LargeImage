@@ -14,7 +14,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol SHMTiledLargeImageViewDelegate <NSObject>
-- (void)imageDownloadFinished:(UIImage *)image sdFormat:(SDImageFormat)format;
+- (void)imageDownloadFinished:(UIImage *)image data:(NSData *)data sdFormat:(SDImageFormat)format;
 @end
 
 @interface SHMTiledLargeImageView : UIView
