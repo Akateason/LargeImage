@@ -12,7 +12,7 @@
 
 #import "SHMPhotoBrowserVC.h"
 
-#import <XTlib/XTlib.h>
+#import <XTBase/XTBase.h>
 #import <BlocksKit/UIView+BlocksKit.h>
 #import <SDWebImage/SDWebImageManager.h>
 

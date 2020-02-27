@@ -1,1 +1,0 @@
-../../../XTColor/XTColor/color/theme/XTThemeConfig.h

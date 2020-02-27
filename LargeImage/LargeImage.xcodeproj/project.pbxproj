@@ -9,9 +9,7 @@
 /* Begin PBXBuildFile section */
 		8F063EA0240380CF004898F7 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F063E9F240380CF004898F7 /* 1.png */; };
 		8F063EA3240387FA004898F7 /* SHMTiledLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F063EA2240387F9004898F7 /* SHMTiledLayer.m */; };
-		8F063EB02403D463004898F7 /* SDImageCache+largeImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F063EAC2403D463004898F7 /* SDImageCache+largeImage.m */; };
 		8F063EB12403D463004898F7 /* SDWebImageManager+largeImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F063EAD2403D463004898F7 /* SDWebImageManager+largeImage.m */; };
-		8F063EB22403D463004898F7 /* SDWebImageDownloader+largeImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F063EAF2403D463004898F7 /* SDWebImageDownloader+largeImage.m */; };
 		8F063EC52404CEC3004898F7 /* SHMPhotoBrowserVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F063EC12404CEC3004898F7 /* SHMPhotoBrowserVC.m */; };
 		8F063EC62404CEC3004898F7 /* SHMPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F063EC22404CEC3004898F7 /* SHMPhotoBrowser.m */; };
 		8F063EC72404CEC3004898F7 /* SHMPhotoBrowserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F063EC32404CEC3004898F7 /* SHMPhotoBrowserCell.m */; };
@@ -54,12 +52,8 @@
 		8F063E9F240380CF004898F7 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		8F063EA1240387F9004898F7 /* SHMTiledLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHMTiledLayer.h; sourceTree = "<group>"; };
 		8F063EA2240387F9004898F7 /* SHMTiledLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHMTiledLayer.m; sourceTree = "<group>"; };
-		8F063EAA2403D463004898F7 /* SDImageCache+largeImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SDImageCache+largeImage.h"; sourceTree = "<group>"; };
 		8F063EAB2403D463004898F7 /* SDWebImageManager+largeImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SDWebImageManager+largeImage.h"; sourceTree = "<group>"; };
-		8F063EAC2403D463004898F7 /* SDImageCache+largeImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SDImageCache+largeImage.m"; sourceTree = "<group>"; };
 		8F063EAD2403D463004898F7 /* SDWebImageManager+largeImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SDWebImageManager+largeImage.m"; sourceTree = "<group>"; };
-		8F063EAE2403D463004898F7 /* SDWebImageDownloader+largeImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SDWebImageDownloader+largeImage.h"; sourceTree = "<group>"; };
-		8F063EAF2403D463004898F7 /* SDWebImageDownloader+largeImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SDWebImageDownloader+largeImage.m"; sourceTree = "<group>"; };
 		8F063EBF2404CEC3004898F7 /* SHMPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHMPhotoBrowser.h; sourceTree = "<group>"; };
 		8F063EC02404CEC3004898F7 /* SHMPhotoBrowserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHMPhotoBrowserCell.h; sourceTree = "<group>"; };
 		8F063EC12404CEC3004898F7 /* SHMPhotoBrowserVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHMPhotoBrowserVC.m; sourceTree = "<group>"; };
@@ -145,10 +139,6 @@
 			children = (
 				8F063EAB2403D463004898F7 /* SDWebImageManager+largeImage.h */,
 				8F063EAD2403D463004898F7 /* SDWebImageManager+largeImage.m */,
-				8F063EAA2403D463004898F7 /* SDImageCache+largeImage.h */,
-				8F063EAC2403D463004898F7 /* SDImageCache+largeImage.m */,
-				8F063EAE2403D463004898F7 /* SDWebImageDownloader+largeImage.h */,
-				8F063EAF2403D463004898F7 /* SDWebImageDownloader+largeImage.m */,
 			);
 			path = SDWebImageExtension;
 			sourceTree = "<group>";
@@ -441,13 +431,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F063EB02403D463004898F7 /* SDImageCache+largeImage.m in Sources */,
 				EE17DC9E21C9E83D006937B8 /* ViewController.m in Sources */,
 				EE17DCA921C9E83E006937B8 /* main.m in Sources */,
 				8F063EC62404CEC3004898F7 /* SHMPhotoBrowser.m in Sources */,
 				8F063EC52404CEC3004898F7 /* SHMPhotoBrowserVC.m in Sources */,
 				8F77A9522405038800B6DD03 /* SHMLargeImageCompressUtil.m in Sources */,
-				8F063EB22403D463004898F7 /* SDWebImageDownloader+largeImage.m in Sources */,
 				EE17DC9B21C9E83D006937B8 /* AppDelegate.m in Sources */,
 				EE17DCCF21C9E85A006937B8 /* SHMTiledLargeImageView.m in Sources */,
 				8F063EB12403D463004898F7 /* SDWebImageManager+largeImage.m in Sources */,

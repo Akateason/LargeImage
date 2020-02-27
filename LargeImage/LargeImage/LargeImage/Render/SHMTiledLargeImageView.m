@@ -8,7 +8,7 @@
 
 #import "SHMTiledLargeImageView.h"
 #import "SHMTiledLayer.h"
-#import <XTlib/XTlib.h>
+#import <XTBase/XTBase.h>
 
 @interface SHMTiledLargeImageView ()
 @property (nonatomic, assign) CGRect    imageRect;

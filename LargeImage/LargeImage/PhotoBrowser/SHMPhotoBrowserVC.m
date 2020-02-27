@@ -26,6 +26,7 @@
     self = [super init];
     if (self) {
         self.webImages = webImages;
+        [WebImgModel shmdb_insertOrIgnoreWithList:webImages];
     }
     return self;
 }
@@ -34,7 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.    
+    
     self.pb = [[SHMPhotoBrowser alloc] initWithWebImgs:self.webImages];
     [self.view addSubview:self.pb];
     [self.pb mas_makeConstraints:^(MASConstraintMaker *make) {

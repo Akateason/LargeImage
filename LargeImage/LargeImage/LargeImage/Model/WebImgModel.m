@@ -17,6 +17,15 @@
     return !self.origin;
 }
 
++ (NSArray *)ignoreProperties {
+    return @[@"currentDisplayMode"];
+}
+
++ (NSDictionary *)modelPropertiesSqliteKeywords {
+    return @{@"image":@"UNIQUE"};
+}
+
+
 
 
 
@@ -62,5 +71,11 @@
     
     return @[m1,m2,m3,m4,m5,m6];
 }
+
+
+
+
+
+
 
 @end

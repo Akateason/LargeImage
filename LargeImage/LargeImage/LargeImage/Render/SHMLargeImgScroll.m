@@ -9,7 +9,7 @@
 #import "SHMLargeImgScroll.h"
 #import <ReactiveObjC.h>
 #import "SHMLargeImageCompressUtil.h"
-#import <XTlib/XTlib.h>
+#import <XTBase/XTBase.h>
 
 @interface SHMLargeImgScroll ()<UIScrollViewDelegate, SHMTiledLargeImageViewDelegate>
 

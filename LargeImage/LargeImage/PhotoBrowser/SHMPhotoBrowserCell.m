@@ -7,7 +7,7 @@
 //
 
 #import "SHMPhotoBrowserCell.h"
-#import <XTlib.h>
+#import <XTBase/XTBase.h>
 #import <Masonry/Masonry.h>
 #import "SHMLargeImgScroll.h"
 #import "WebImgModel.h"

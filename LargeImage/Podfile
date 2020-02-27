@@ -10,12 +10,12 @@ target 'LargeImage' do
   pod 'SDWebImage/GIF'
   pod 'FLAnimatedImage', '~> 1.0'
   pod 'SHMDatabase'
-  
+  pod 'BlocksKit'
   
   pod 'XTBase'
-  pod 'XTlib'
+#  pod 'XTlib'
 #  pod 'XTlib/Animations'
-  pod 'XTlib/CustomUIs'
+#  pod 'XTlib/CustomUIs'
 #  pod 'XTIAP'
   
 #  pod 'XTBase',:path => '../../teason_project/XTBase/'

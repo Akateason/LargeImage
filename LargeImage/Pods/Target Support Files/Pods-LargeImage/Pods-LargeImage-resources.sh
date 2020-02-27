@@ -98,29 +98,11 @@ EOM
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle"
-  install_resource "${PODS_ROOT}/RSKImageCropper/RSKImageCropper/RSKImageCropperStrings.bundle"
   install_resource "${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
-  install_resource "${PODS_ROOT}/XTColor/XTColor/color/XTColors.plist"
-  install_resource "${PODS_ROOT}/XTlib/XTlib/XTlib/Components/CustomUIs/XTPhotoAlbum/source/ab_select@2x.png"
-  install_resource "${PODS_ROOT}/XTlib/XTlib/XTlib/Components/CustomUIs/XTPhotoAlbum/source/ab_selected@2x.png"
-  install_resource "${PODS_ROOT}/XTlib/XTlib/XTlib/Components/CustomUIs/XTPhotoAlbum/source/ab_t_icon@2x.png"
-  install_resource "${PODS_ROOT}/XTlib/XTlib/XTlib/Components/CustomUIs/XTSegment/btBase.png"
-  install_resource "${PODS_ROOT}/XTlib/XTlib/XTlib/Components/CustomUIs/XTPhotoAlbum/album/XTPAlbumCell.xib"
-  install_resource "${PODS_ROOT}/XTlib/XTlib/XTlib/Components/CustomUIs/XTPhotoAlbum/cameraGroup/XTPACameraGroupCell.xib"
-  install_resource "${PODS_ROOT}/XTlib/XTlib/XTlib/Components/CustomUIs/XTStretchSegment/XTStretchSegCell.xib"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle"
-  install_resource "${PODS_ROOT}/RSKImageCropper/RSKImageCropper/RSKImageCropperStrings.bundle"
   install_resource "${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
-  install_resource "${PODS_ROOT}/XTColor/XTColor/color/XTColors.plist"
-  install_resource "${PODS_ROOT}/XTlib/XTlib/XTlib/Components/CustomUIs/XTPhotoAlbum/source/ab_select@2x.png"
-  install_resource "${PODS_ROOT}/XTlib/XTlib/XTlib/Components/CustomUIs/XTPhotoAlbum/source/ab_selected@2x.png"
-  install_resource "${PODS_ROOT}/XTlib/XTlib/XTlib/Components/CustomUIs/XTPhotoAlbum/source/ab_t_icon@2x.png"
-  install_resource "${PODS_ROOT}/XTlib/XTlib/XTlib/Components/CustomUIs/XTSegment/btBase.png"
-  install_resource "${PODS_ROOT}/XTlib/XTlib/XTlib/Components/CustomUIs/XTPhotoAlbum/album/XTPAlbumCell.xib"
-  install_resource "${PODS_ROOT}/XTlib/XTlib/XTlib/Components/CustomUIs/XTPhotoAlbum/cameraGroup/XTPACameraGroupCell.xib"
-  install_resource "${PODS_ROOT}/XTlib/XTlib/XTlib/Components/CustomUIs/XTStretchSegment/XTStretchSegCell.xib"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

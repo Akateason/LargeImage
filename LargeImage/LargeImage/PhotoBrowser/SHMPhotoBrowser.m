@@ -9,7 +9,7 @@
 #import "SHMPhotoBrowser.h"
 #import <Masonry/Masonry.h>
 #import <ReactiveObjC/ReactiveObjC.h>
-#import "XTlib.h"
+#import <XTBase/XTBase.h>
 #import "SHMPhotoBrowserCell.h"
 #import "WebImgModel.h"
 
@@ -70,8 +70,14 @@
 
         //TODO
         //确认加载Mode 1.是否存在原图 2.是否已下载原图.
+        //1.是否存在原图
         WebImgModel *aModel = self.datas[x.integerValue];
-        if ([aModel onlyTakeThumbnail] ) return;  //1.不存在大图
+        if ([aModel onlyTakeThumbnail] ) return;  //不存在原图
+        
+        //存在原图 2.是否已下载原图.
+        //未下载.
+        
+        //已下载.
         
 //        [self.datas enumerateObjectsUsingBlock:^(WebImgModel *item, NSUInteger idx, BOOL * _Nonnull stop) {
 //            item.currentDisplayMode = idx == x.integerValue ? WebImgModelisplayMode_origin : WebImgModelisplayMode_thumbnail ;
@@ -89,14 +95,31 @@
     
     [[self.saveImgButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
         NSLog(@"TODO 保存到本地");
+        
     }];
     
     [[self.seeOriginButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
         NSLog(@"TODO 下载");
     }];
+    
+    
+    
+    
 }
 
+#pragma mark - setter
 
+- (void)setCurrentIdx:(NSInteger)currentIdx {
+    _currentIdx = currentIdx;
+    
+    WebImgModel *aModel = self.datas[currentIdx];
+    self.titleLabel.text = [NSString stringWithFormat:@"%ld/%lu",currentIdx+1,(unsigned long)self.datas.count];
+    if ([aModel onlyTakeThumbnail]) {
+        self.seeOriginButton.hidden = YES;
+    } else {
+        self.seeOriginButton.hidden = aModel.hasDownloadOrigin;
+    }
+}
 
 
 #pragma mark - UICollectionView
@@ -121,13 +144,7 @@
 
 
 
-#pragma mark - p
-
-- (void)setCurrentIdx:(NSInteger)currentIdx {
-    _currentIdx = currentIdx;
-    
-    self.titleLabel.text = [NSString stringWithFormat:@"%ld/%lu",currentIdx+1,(unsigned long)self.datas.count];
-}
+#pragma mark - getter
 
 - (UILabel *)titleLabel {
     if (!_titleLabel) {

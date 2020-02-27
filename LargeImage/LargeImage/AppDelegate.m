@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import <SHMDatabase/SHMDatabase.h>
+#import "WebImgModel.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +19,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+#ifdef DEBUG
+    [SHMDatabaseSDK sharedInstance].isDebugMode = YES; //是否打印内部log
+#endif
+    NSString *libraryPath = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask,YES).firstObject;
+    NSString *yourDbPath = [libraryPath stringByAppendingString:@"/shmDb.db"];
+    [[SHMDatabaseSDK sharedInstance] configureDBWithPath:yourDbPath];
+    [WebImgModel shmdb_createTable];
+    
     return YES;
 }
 
