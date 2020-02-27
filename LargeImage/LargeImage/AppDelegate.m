@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import <XTBase/XTBase.h>
+
 #import <SHMDatabase/SHMDatabase.h>
 #import "WebImgModel.h"
 
@@ -19,6 +21,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [XTlibConfig.sharedInstance defaultConfiguration];
+    
     
 #ifdef DEBUG
     [SHMDatabaseSDK sharedInstance].isDebugMode = YES; //是否打印内部log

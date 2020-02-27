@@ -26,12 +26,21 @@
     self = [super init];
     if (self) {
         self.webImages = webImages;
-        [WebImgModel shmdb_insertOrIgnoreWithList:webImages];
     }
     return self;
 }
 
-
+- (void)setWebImages:(NSArray<WebImgModel *> *)webImages {
+    [webImages enumerateObjectsUsingBlock:^(WebImgModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        WebImgModel *dbitem = [WebImgModel shmdb_findFirstWhere:[NSString stringWithFormat:@"image=='%@'",obj.image]];
+        if (dbitem.image.length && dbitem) {
+            obj.hasDownloadOrigin = dbitem.hasDownloadOrigin;
+        }
+    }];
+    _webImages = webImages;
+    
+    [WebImgModel shmdb_insertOrIgnoreWithList:self.webImages];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -42,6 +51,8 @@
         make.edges.equalTo(self.view);
     }];
 }
+
+
 
 
 @end

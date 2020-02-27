@@ -13,6 +13,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+static NSString *const kNoti_ResetToThumbNail   = @"kNoti_ResetToThumbNail";
+//static NSString *const kNoti_DownloadLargeImage = @"kNoti_DownloadLargeImage";
+
 typedef NS_ENUM(NSUInteger, WebImgModelisplayMode) {
     WebImgModelisplayMode_thumbnail = 0 ,
     WebImgModelisplayMode_origin,
@@ -25,7 +28,6 @@ typedef NS_ENUM(NSUInteger, WebImgModelisplayMode) {
 @property (nonatomic,copy) NSString *origin;
 @property (nonatomic)      int      hasDownloadOrigin;
 
-@property (nonatomic) WebImgModelisplayMode currentDisplayMode ;
 
 
 - (BOOL)onlyTakeThumbnail;

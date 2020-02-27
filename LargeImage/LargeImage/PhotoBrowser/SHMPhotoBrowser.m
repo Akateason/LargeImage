@@ -9,11 +9,12 @@
 #import "SHMPhotoBrowser.h"
 #import <Masonry/Masonry.h>
 #import <ReactiveObjC/ReactiveObjC.h>
-#import <XTBase/XTBase.h>
 #import "SHMPhotoBrowserCell.h"
 #import "WebImgModel.h"
+#import "SHMLargeImgScroll.h"
+#import <XTBase/XTBase.h>
 
-@interface SHMPhotoBrowser () <UICollectionViewDelegate,UICollectionViewDataSource>
+@interface SHMPhotoBrowser () <UICollectionViewDelegate,UICollectionViewDataSource,SHMLargeImgScrollCallback>
 @property (copy, nonatomic)     NSArray             *datas;
 @property (nonatomic)           NSInteger           currentIdx;
 
@@ -33,61 +34,15 @@
     if (self) {
         self.datas = models;
         [self setupUI];
-        
+        [self setup];
         self.currentIdx = 0;
     }
     return self;
 }
 
-- (void)setupUI {
-    self.collectionView = ({
-        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        layout.minimumLineSpacing = 0;
-        layout.minimumInteritemSpacing = 0;
-        layout.itemSize = CGSizeMake(APP_WIDTH, APP_HEIGHT);
-        
-        UICollectionView *v = [[UICollectionView alloc] initWithFrame:APPFRAME collectionViewLayout:layout] ;
-        [self addSubview:v];
-        [v mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self);
-        }];
-        v.collectionViewLayout = layout;
-        v.dataSource = self;
-        v.delegate = self;
-        v.pagingEnabled = TRUE;
-        v;
-    });
-    [self.collectionView registerClass:[SHMPhotoBrowserCell class] forCellWithReuseIdentifier:@"SHMPhotoBrowserCell"];
-    
-    
-    @weakify(self)
-    [[[RACObserve(self, currentIdx) throttle:1]
-      deliverOnMainThread]
-     subscribeNext:^(NSNumber *x) {
-        @strongify(self)
-        if (!self.window) return ;
 
-        //TODO
-        //确认加载Mode 1.是否存在原图 2.是否已下载原图.
-        //1.是否存在原图
-        WebImgModel *aModel = self.datas[x.integerValue];
-        if ([aModel onlyTakeThumbnail] ) return;  //不存在原图
-        
-        //存在原图 2.是否已下载原图.
-        //未下载.
-        
-        //已下载.
-        
-//        [self.datas enumerateObjectsUsingBlock:^(WebImgModel *item, NSUInteger idx, BOOL * _Nonnull stop) {
-//            item.currentDisplayMode = idx == x.integerValue ? WebImgModelisplayMode_origin : WebImgModelisplayMode_thumbnail ;
-//        }];
-//        [self.collectionView reloadData];
-        
-        
-    }];
-    
-    
+- (void)setup {
+    @weakify(self)
     [[self.closeButton rac_signalForControlEvents:(UIControlEventTouchUpInside)] subscribeNext:^(__kindof UIControl * _Nullable x) {
         @strongify(self)
         [self.xt_viewController dismissViewControllerAnimated:YES completion:nil];
@@ -99,13 +54,44 @@
     }];
     
     [[self.seeOriginButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
-        NSLog(@"TODO 下载");
+//        NSLog(@"点击 下载 大图");
+        @strongify(self)
+        [self downloadCurrentOriginImage];
+    }];
+    
+    
+    
+    // 滑动之后. 过一秒. 去切换大图
+    [[[RACObserve(self, currentIdx) throttle:1]
+      deliverOnMainThread]
+     subscribeNext:^(NSNumber *x) {
+        @strongify(self)
+        if (!self.window) return ;
+        
+        //确认加载Mode 1.是否存在原图 2.是否已下载原图.
+        //1.是否存在原图
+        WebImgModel *aModel = self.datas[x.integerValue];
+        if ([aModel onlyTakeThumbnail] ) return;  //不存在原图
+        
+        //存在原图 2.是否已下载原图.
+        if (aModel.hasDownloadOrigin) { //已下载. 通知切换
+            NSLog(@"已下载. 通知切换");
+            [self downloadCurrentOriginImage];
+        } else {
+            //未下载. 保持
+        }
     }];
     
     
     
     
 }
+
+- (void)downloadCurrentOriginImage {
+    SHMPhotoBrowserCell *cell = (SHMPhotoBrowserCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:self.currentIdx inSection:0]];
+    [cell.imgScroll goDownloadLarge:self.datas[self.currentIdx]];
+}
+
 
 #pragma mark - setter
 
@@ -118,7 +104,13 @@
         self.seeOriginButton.hidden = YES;
     } else {
         self.seeOriginButton.hidden = aModel.hasDownloadOrigin;
+        
+        if ( !aModel.hasDownloadOrigin ) {
+            [self.seeOriginButton setTitle:@"查看原图" forState:0];
+        }
     }
+    
+        
 }
 
 
@@ -132,13 +124,63 @@
             
     SHMPhotoBrowserCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SHMPhotoBrowserCell" forIndexPath:indexPath];
     cell.model = self.datas[indexPath.row];
-    xt_LOG_DEBUG(@"加载第%@张 的 %@",@(indexPath.row+1), cell.model.currentDisplayMode?@"原图":@"缩略图");
+    cell.imgScroll.callback = self;
+    xt_LOG_DEBUG(@"加载第%@张",@(indexPath.row+1));
     return cell;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     self.currentIdx = 0 + scrollView.contentOffset.x / APP_WIDTH;
 }
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    // 触发滑动的时候. 全部切换缩略图
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNoti_ResetToThumbNail object:nil];
+}
+
+#pragma mark - SHMLargeImgScrollCallback <NSObject>
+static NSString *const kStrLoadingStart = @"加载中...";
+static NSString *const kStrLoaded       = @"已完成";
+
+- (void)downloadLargeImageProgressVal:(float)val {
+//    NSLog(@"val : %@", @(val));
+    val *= 100.0f;
+    val = val?:0;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *str = val >= 100 ? kStrLoadingStart : [NSString stringWithFormat:@"%.1f%%",val] ;
+        [self.seeOriginButton setTitle:str forState:0];
+    });
+}
+
+- (void)largeImgStartLoading:(WebImgModel *)model {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.seeOriginButton setTitle:kStrLoadingStart forState:0];
+    });
+}
+
+- (void)largeImgloadingFinished:(WebImgModel *)model {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.seeOriginButton setTitle:kStrLoaded forState:0];
+                
+        [UIView animateWithDuration:.2 delay:.4 options:0 animations:^{
+            self.seeOriginButton.alpha = .2;
+        } completion:^(BOOL finished) {
+            self.seeOriginButton.hidden = YES;
+            self.seeOriginButton.alpha = 1;
+        }];
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -226,5 +268,30 @@
     return _seeOriginButton;
 }
 
+
+- (void)setupUI {
+    self.collectionView = ({
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        layout.minimumLineSpacing = 0;
+        layout.minimumInteritemSpacing = 0;
+        layout.itemSize = CGSizeMake(APP_WIDTH, APP_HEIGHT);
+        
+        UICollectionView *v = [[UICollectionView alloc] initWithFrame:APPFRAME collectionViewLayout:layout] ;
+        [self addSubview:v];
+        [v mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self);
+        }];
+        v.collectionViewLayout = layout;
+        v.dataSource = self;
+        v.delegate = self;
+        v.pagingEnabled = TRUE;
+        v;
+    });
+    [self.collectionView registerClass:[SHMPhotoBrowserCell class] forCellWithReuseIdentifier:@"SHMPhotoBrowserCell"];
+    [self closeButton];
+    [self saveImgButton];
+    [self seeOriginButton];
+}
 
 @end

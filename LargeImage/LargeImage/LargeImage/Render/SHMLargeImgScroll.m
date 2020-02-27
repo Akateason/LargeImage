@@ -11,8 +11,10 @@
 #import "SHMLargeImageCompressUtil.h"
 #import <XTBase/XTBase.h>
 
-@interface SHMLargeImgScroll ()<UIScrollViewDelegate, SHMTiledLargeImageViewDelegate>
+@interface SHMLargeImgScroll ()<UIScrollViewDelegate>
+@property (strong, nonatomic)    WebImgModel                    *myModel ;
 
+@property (nonatomic) WebImgModelisplayMode currentDisplayMode ;
 @end
 
 @implementation SHMLargeImgScroll
@@ -30,15 +32,30 @@
         [self setupGesture];
         [self largeImgView];
         [self imageView];
+        [self setupNotifications];
     }
     return self;
 }
 
+- (void)setupNotifications {
+    @weakify(self)
+    [[[[[NSNotificationCenter defaultCenter] rac_addObserverForName:kNoti_ResetToThumbNail object:nil]
+      deliverOnMainThread]
+      takeUntil:self.rac_willDeallocSignal]
+     subscribeNext:^(NSNotification * _Nullable x) {
+        @strongify(self)
+        self.currentDisplayMode = WebImgModelisplayMode_thumbnail;
+        
+        self.largeImgView.image = nil; // 删除大图
+        self.largeImgView.hidden = YES;
+    }] ;
+    
+
+}
+
 - (void)setupLargeImage:(UIImage *)img {
     [self clear];
-    self.imageView.hidden = YES;
-    self.largeImgView.hidden = NO;
-    
+        
     RACTuple *info = [self infoFromImage:img];
     RACTupleUnpack(NSNumber *scaleNum, NSValue *rectVal) = info ;
     CGFloat imageScale = scaleNum.floatValue;
@@ -56,22 +73,31 @@
     [self.largeImgView setImage:img scale:imageScale] ;
     self.largeImgView.frame = imageRect;
     [self resetScrollToOrigin];
+    
+    self.largeImgView.hidden = NO;
+//    [UIView animateWithDuration:3 delay:0 options:(UIViewAnimationOptionCurveLinear) animations:^{
+//        self.imageView.alpha = 0.2;
+//    } completion:^(BOOL finished) {
+//        self.imageView.alpha = 1;
+//    }];
+    NSLog(@"正在加载大图");
+    if (self.currentDisplayMode == WebImgModelisplayMode_origin) [self.callback largeImgloadingFinished:self.myModel] ;
 }
 
 - (void)setupSDRender:(UIImage *)image {
     [self clear];
-    self.imageView.hidden = NO;
     self.largeImgView.hidden = YES;
     self.maximumZoomScale = 3;
     self.minimumZoomScale = 1;
     
     self.imageView.image = image;
     [self resetScrollToOrigin];
+    
+    if (self.currentDisplayMode == WebImgModelisplayMode_origin) [self.callback largeImgloadingFinished:self.myModel] ;
 }
 
 - (void)setupGifData:(NSData *)data {
     [self clear];
-    self.imageView.hidden = NO;
     self.largeImgView.hidden = YES;
     self.maximumZoomScale = 3;
     self.minimumZoomScale = 1;
@@ -126,7 +152,6 @@ static const float kSIDE_ZOOMTORECT = 80.0f;
     if (!_largeImgView) {
         _largeImgView = [[SHMTiledLargeImageView alloc] initWithFrame:self.bounds];
         if (!_largeImgView.superview) [self addSubview:_largeImgView];
-        _largeImgView.delegate = self;
     }
     return _largeImgView;
 }
@@ -163,7 +188,7 @@ static const float kSIDE_ZOOMTORECT = 80.0f;
 
 - (void)clear {
     self.imageView.animatedImage = nil;
-    self.imageView.image = nil;
+//    self.imageView.alpha = 1;
         
     self.largeImgView.image = nil;
 }
@@ -202,27 +227,53 @@ static const float kSIDE_ZOOMTORECT = 80.0f;
     return RACTuplePack(@(imageScale),@(imageRect));
 }
 
-- (void)setImgUrlString:(NSString *)urlString {
-    [self clear];
+
+- (void)goDownload:(WebImgModel *)model {
+    self.myModel = model;
     
-    UIActivityIndicatorView *aiView   = [UIActivityIndicatorView new];
-    aiView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
-    aiView.center                     = self.center;
-    [self addSubview:aiView];
-    [aiView startAnimating];
+    NSString *urlString;
+    switch (self.currentDisplayMode) {
+        case WebImgModelisplayMode_thumbnail: urlString = model.image; break;
+        case WebImgModelisplayMode_origin: urlString = model.origin; break;
+        default: break;
+    }
+                
+    UIActivityIndicatorView *aiView;
+    if (self.currentDisplayMode == WebImgModelisplayMode_thumbnail) {
+        aiView = [UIActivityIndicatorView new];
+        aiView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+        aiView.center                     = self.center;
+        [self addSubview:aiView];
+        [aiView startAnimating];
+    }
     
     @weakify(self)
     [[SDWebImageManager sharedManagerForLargeImage] loadImageWithURL:[NSURL URLWithString:urlString]
                                                              options:SDWebImageScaleDownLargeImages
-                                                            progress:nil
+                                                            progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+        
+        @strongify(self)
+        if (self.currentDisplayMode == WebImgModelisplayMode_origin && self.callback) {
+            [self.callback downloadLargeImageProgressVal:(float)receivedSize / (float)expectedSize];
+        }
+    }
                                                            completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
 
         @strongify(self)
+        if (self.currentDisplayMode == WebImgModelisplayMode_thumbnail) {
+            [aiView stopAnimating];
+            [aiView removeFromSuperview];
+        } else {
+            [self.callback largeImgStartLoading:self.myModel] ;
+        }
+        
         SDImageFormat format = [NSData sd_imageFormatForImageData:data];
         [self imageDownloadFinished:image data:data sdFormat:format] ;
+        if (self.currentDisplayMode == WebImgModelisplayMode_origin && !model.hasDownloadOrigin) {
+            model.hasDownloadOrigin = 1;
+            [model shmdb_upsertWhereByProp:@"image"];
+        }
         
-        [aiView stopAnimating];
-        [aiView removeFromSuperview];
     }];
 }
 
@@ -230,34 +281,55 @@ static const float kSIDE_ZOOMTORECT = 80.0f;
                          data:(NSData *)data
                      sdFormat:(SDImageFormat)format {
     
-    
-    switch (format) {
-        case SDImageFormatJPEG: {
-            [self setupLargeImage:image];
+    if (self.currentDisplayMode == WebImgModelisplayMode_thumbnail) {
+        if (format == SDImageFormatGIF) [self setupGifData:data];
+        else [self setupSDRender:image] ;
+    } else {
+        switch (format) {
+           case SDImageFormatJPEG: {
+               [self setupLargeImage:image];
+           }
+               break;
+           case SDImageFormatPNG: {
+               @weakify(self)
+               [self compressBigPngIfNeeded:image data:data complete:^(UIImage *image) {
+                   @strongify(self)
+                   [self setupLargeImage:image];
+               }];
+           }
+               break;
+           case SDImageFormatGIF: {
+               [self setupGifData:data];
+           }
+               break;
+           case SDImageFormatTIFF:
+           case SDImageFormatWebP:
+           case SDImageFormatHEIC:
+           case SDImageFormatUndefined: {
+               [self setupSDRender:image] ;
+           }
+               break;
+           default:
+               break;
         }
-            break;
-        case SDImageFormatPNG: {
-            @weakify(self)
-            [self compressBigPngIfNeeded:image data:data complete:^(UIImage *image) {
-                @strongify(self)
-                [self setupLargeImage:image];
-            }];
-        }
-            break;
-        case SDImageFormatGIF: {
-            [self setupGifData:data];
-        }
-            break;
-        case SDImageFormatTIFF:
-        case SDImageFormatWebP:
-        case SDImageFormatHEIC:
-        case SDImageFormatUndefined: {
-            [self setupSDRender:image] ;
-        }
-            break;
-        default:
-            break;
     }
+}
+
+
+- (void)goDownloadLarge:(WebImgModel *)model {
+    if (![self.myModel.image isEqualToString:model.image]) return;
+    if (self.currentDisplayMode == WebImgModelisplayMode_origin) return;
+            
+    self.currentDisplayMode = WebImgModelisplayMode_origin;
+    self.largeImgView.hidden = NO;
+    [self goDownload:model];
+}
+
+- (void)goDownloadThumbnail:(WebImgModel *)model {
+    self.currentDisplayMode = WebImgModelisplayMode_thumbnail;
+    [self clear];
+    self.imageView.image = nil;
+    [self goDownload:model];
 }
 
 

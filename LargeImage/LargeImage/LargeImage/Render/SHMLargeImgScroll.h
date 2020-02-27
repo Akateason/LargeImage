@@ -9,18 +9,27 @@
 #import <UIKit/UIKit.h>
 #import "SHMTiledLargeImageView.h"
 #import <FLAnimatedImageView+WebCache.h>
+#import "WebImgModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol SHMLargeImgScrollCallback <NSObject>
+@required
+- (void)downloadLargeImageProgressVal:(float)val;
+- (void)largeImgStartLoading:(WebImgModel *)model;
+- (void)largeImgloadingFinished:(WebImgModel *)model;
+@end
 
 
 @interface SHMLargeImgScroll : UIScrollView
-@property (nonatomic, strong)    SHMTiledLargeImageView         *largeImgView;
-@property (nonatomic, strong)    FLAnimatedImageView            *imageView;
+@property (weak, nonatomic)      id<SHMLargeImgScrollCallback>  callback;
+@property (strong, nonatomic)    SHMTiledLargeImageView         *largeImgView;
+@property (strong, nonatomic)    FLAnimatedImageView            *imageView;
 
 
-//TODO: param model
-- (void)setImgUrlString:(NSString *)urlString;
+- (void)goDownloadThumbnail:(WebImgModel *)model ;
+
+- (void)goDownloadLarge:(WebImgModel *)model ;
 
 @end
 

@@ -19,6 +19,7 @@
 
 
 
+
 - (void)setImage:(UIImage *)image scale:(CGFloat)scale {
     self.image = image;
     _imageRect = CGRectMake(0.0f, 0.0f,
@@ -35,6 +36,8 @@
     tiledLayer.levelsOfDetailBias = lev;
 //    tiledLayer.tileSize  此处tilesize使用默认的256x256即可
 //    tiledLayer.tileSize = CGSizeMake(100, 100);
+    
+    [self setNeedsDisplay] ;
 }
 
 - (void)drawRect:(CGRect)rect {

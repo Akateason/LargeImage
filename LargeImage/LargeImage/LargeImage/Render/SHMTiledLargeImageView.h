@@ -11,14 +11,7 @@
 #import <UIImageView+WebCache.h>
 #import <NSData+ImageContentType.h>
 
-
-
-@protocol SHMTiledLargeImageViewDelegate <NSObject>
-- (void)imageDownloadFinished:(UIImage *)image data:(NSData *)data sdFormat:(SDImageFormat)format;
-@end
-
 @interface SHMTiledLargeImageView : UIView
-@property (weak, nonatomic)     id<SHMTiledLargeImageViewDelegate> delegate;
 @property (strong, nonatomic)   UIImage   *image;
 @property (nonatomic)           CGFloat   imageScale;
 

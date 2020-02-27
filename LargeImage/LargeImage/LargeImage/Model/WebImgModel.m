@@ -44,6 +44,8 @@
 //        ];
 
     
+
+    
     WebImgModel *m1 = [WebImgModel new];
     m1.image = @"https://images.smcdn.cn/femv2VR7Je0ZJciK/IMG_0719.GIF!thumbnail";
 //    m1.origin = @"https://images.smcdn.cn/femv2VR7Je0ZJciK/IMG_0719.GIF!original",
@@ -68,8 +70,11 @@
     m6.image = @"https://images.smcdn.cn/tWHH7Ncg6NEydnYL/IMG_0312.GIF!thumbnail";
     m6.origin = @"https://images.smcdn.cn/tWHH7Ncg6NEydnYL/IMG_0312.GIF!original";
     
-    
-    return @[m1,m2,m3,m4,m5,m6];
+    WebImgModel *m7 = [WebImgModel new];
+    m7.image = @"https://uploader.shimo.im/f/6GMlNLd4zSMuQqAD.jpg!thumbnail";
+    m7.origin = @"https://uploader.shimo.im/f/6GMlNLd4zSMuQqAD.jpg!original";
+        
+    return @[m1,m2,m3,m4,m5,m6,m7];
 }
 
 

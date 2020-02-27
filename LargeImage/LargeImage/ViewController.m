@@ -15,12 +15,13 @@
 #import <XTBase/XTBase.h>
 #import <BlocksKit/UIView+BlocksKit.h>
 #import <SDWebImage/SDWebImageManager.h>
+#import "SDWebImageManager+largeImage.h"
 
 #import "WebImgModel.h"
 
 
 @interface ViewController ()
-@property (nonatomic, strong) SHMLargeImgScroll *imgScroll;
+
 @end
 
 @implementation ViewController
@@ -30,16 +31,25 @@
     
     [super viewDidLoad];
     
-    NSArray *urls = [WebImgModel fakelist];
-
-
     
 
-//    clear sd
-//    [SDWebImageManager.sharedManager.imageCache clearMemory];
-//    [SDWebImageManager.sharedManager.imageCache clearDiskOnCompletion:^{
-//
-//    }];
+
+    UIButton *bt = [UIButton new];
+    [bt setTitle:@"clear" forState:0];
+    bt.backgroundColor = [UIColor redColor];
+    [self.view addSubview:bt];
+    [bt mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.view);
+        make.size.mas_equalTo(CGSizeMake(100, 40));
+    }];
+    
+    [bt bk_whenTapped:^{
+        
+        [self cleanAll];
+
+    }];
+
+
     
     
     
@@ -56,11 +66,31 @@
     @weakify(self)
     [self.view bk_whenTapped:^{
         @strongify(self)
+        NSArray *urls = [WebImgModel fakelist];
         SHMPhotoBrowserVC *vc = [SHMPhotoBrowserVC setup:urls];
         [self presentViewController:vc animated:YES completion:nil];
 
     }];
 
+}
+
+
+- (void)cleanAll {
+//        clear sd default
+    [SDWebImageManager.sharedManager.imageCache clearMemory];
+    [SDWebImageManager.sharedManager.imageCache clearDiskOnCompletion:^{
+
+    }];
+    
+//        clear large
+    [SDWebImageManager.sharedManagerForLargeImage.imageCache clearMemory];
+    [SDWebImageManager.sharedManagerForLargeImage.imageCache clearDiskOnCompletion:^{
+
+    }];
+    
+//    drop WebImgModel
+    [WebImgModel shmdb_dropTable];
+        
 }
 
 

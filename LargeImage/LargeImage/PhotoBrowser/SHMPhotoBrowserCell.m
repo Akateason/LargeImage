@@ -39,11 +39,8 @@
 - (void)setModel:(WebImgModel *)model {
     _model = model;
     
-    switch (model.currentDisplayMode) {
-        case WebImgModelisplayMode_thumbnail: [self.imgScroll setImgUrlString:model.image]; break;
-        case WebImgModelisplayMode_origin: [self.imgScroll setImgUrlString:model.origin]; break;
-        default: break;
-    }
+    [self.imgScroll goDownloadThumbnail:model];
+        
 }
 
 
