@@ -121,11 +121,10 @@
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-            
     SHMPhotoBrowserCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SHMPhotoBrowserCell" forIndexPath:indexPath];
     cell.model = self.datas[indexPath.row];
     cell.imgScroll.callback = self;
-    xt_LOG_DEBUG(@"加载第%@张",@(indexPath.row+1));
+//    xt_LOG_DEBUG(@"加载第%@张",@(indexPath.row+1));
     return cell;
 }
 
