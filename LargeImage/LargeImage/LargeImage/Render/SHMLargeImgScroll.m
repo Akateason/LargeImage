@@ -12,7 +12,7 @@
 #import <XTlib/XTlib.h>
 
 @interface SHMLargeImgScroll ()<UIScrollViewDelegate, SHMTiledLargeImageViewDelegate>
-//@property (nonatomic) BOOL doubleClicked ;
+
 @end
 
 @implementation SHMLargeImgScroll
@@ -28,7 +28,6 @@
         self.delegate = self;
         self.backgroundColor = [UIColor blackColor];
         [self setupGesture];
-        
         [self largeImgView];
         [self imageView];
     }
@@ -82,19 +81,6 @@
     [self resetScrollToOrigin];
 }
 
-- (void)clear {
-    self.imageView.animatedImage = nil;
-    self.imageView.image = nil;
-        
-    self.largeImgView.image = nil;
-}
-
-- (void)resetScrollToOrigin {
-    self.zoomScale = 1;
-    [self setuplargeImgViewFrame];
-    self.imageView.frame = self.bounds;
-    [self scrollRectToVisible:self.bounds animated:NO];
-}
 
 
 #pragma mark - gesture
@@ -175,6 +161,20 @@ static const float kSIDE_ZOOMTORECT = 80.0f;
     self.largeImgView.contentScaleFactor = 1.0;
 }
 
+- (void)clear {
+    self.imageView.animatedImage = nil;
+    self.imageView.image = nil;
+        
+    self.largeImgView.image = nil;
+}
+
+- (void)resetScrollToOrigin {
+    self.zoomScale = 1;
+    [self setuplargeImgViewFrame];
+    self.imageView.frame = self.bounds;
+    [self scrollRectToVisible:self.bounds animated:NO];
+}
+
 - (void)compressBigPngIfNeeded:(UIImage *)image
                           data:(NSData *)data
                       complete:(void(^)(UIImage *image))completion {
@@ -203,6 +203,8 @@ static const float kSIDE_ZOOMTORECT = 80.0f;
 }
 
 - (void)setImgUrlString:(NSString *)urlString {
+    [self clear];
+    
     UIActivityIndicatorView *aiView   = [UIActivityIndicatorView new];
     aiView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
     aiView.center                     = self.center;
@@ -224,7 +226,11 @@ static const float kSIDE_ZOOMTORECT = 80.0f;
     }];
 }
 
-- (void)imageDownloadFinished:(UIImage *)image data:(NSData *)data sdFormat:(SDImageFormat)format {
+- (void)imageDownloadFinished:(UIImage *)image
+                         data:(NSData *)data
+                     sdFormat:(SDImageFormat)format {
+    
+    
     switch (format) {
         case SDImageFormatJPEG: {
             [self setupLargeImage:image];

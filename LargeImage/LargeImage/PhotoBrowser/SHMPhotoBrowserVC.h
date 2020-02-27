@@ -13,9 +13,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SHMPhotoBrowserVC : UIViewController
-@property (copy, nonatomic) NSArray <WebImgModel *> *webImages ;
-@property (strong, nonatomic) SHMPhotoBrowser *pb ;
-+ (instancetype)setup:(NSArray <WebImgModel *> *)webImages ;
+@property (copy, nonatomic)     NSArray <WebImgModel *> *webImages;
+@property (strong, nonatomic)   SHMPhotoBrowser         *pb;
+
+
++ (instancetype)setup:(NSArray <WebImgModel *> *)webImages;
+- (instancetype)initWithWebImgs:(NSArray *)webImages;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+@class SHMLargeImgScroll,WebImgModel;
+
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SHMPhotoBrowserCell : UICollectionViewCell
-@property (copy, nonatomic) NSString *urlStr;
+@property (strong, nonatomic)             WebImgModel         *model;
+@property (strong, nonatomic, readonly)   SHMLargeImgScroll   *imgScroll;
 @end
 
 NS_ASSUME_NONNULL_END

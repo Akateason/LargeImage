@@ -26,6 +26,8 @@
 @implementation ViewController
 
 - (void)viewDidLoad {
+    [XTlibConfig.sharedInstance defaultConfiguration];
+    
     [super viewDidLoad];
     
     NSArray *urls = [WebImgModel fakelist];

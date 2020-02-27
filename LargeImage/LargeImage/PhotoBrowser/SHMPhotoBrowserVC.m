@@ -18,11 +18,11 @@
 @implementation SHMPhotoBrowserVC
 
 + (instancetype)setup:(NSArray <WebImgModel *> *)webImages {
-    SHMPhotoBrowserVC *vc = [[SHMPhotoBrowserVC alloc] initWithUrls:webImages];
+    SHMPhotoBrowserVC *vc = [[SHMPhotoBrowserVC alloc] initWithWebImgs:webImages];
     return vc;
 }
 
-- (instancetype)initWithUrls:(NSArray *)webImages {
+- (instancetype)initWithWebImgs:(NSArray *)webImages {
     self = [super init];
     if (self) {
         self.webImages = webImages;
@@ -34,17 +34,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
+    // Do any additional setup after loading the view.    
     self.pb = [[SHMPhotoBrowser alloc] initWithWebImgs:self.webImages];
     [self.view addSubview:self.pb];
     [self.pb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-    
-
-    
-    
 }
 
 

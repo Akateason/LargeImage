@@ -13,7 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SHMLargeImageCompressUtil : NSObject
 
-+ (void)downsize:(nullable UIImage *)sourceImage complete:(void(^)(UIImage *image))completion ;
++ (void)downsize:(nullable UIImage *)sourceImage
+        complete:(void(^)(UIImage *image))completion ;
 
 
 
@@ -21,7 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 
-+ (UIImage *)scaledImageFromData:(NSData *)data width:(CGFloat)width ;
++ (UIImage *)scaledImageFromData:(NSData *)data
+                           width:(CGFloat)width ;
 
 @end
 

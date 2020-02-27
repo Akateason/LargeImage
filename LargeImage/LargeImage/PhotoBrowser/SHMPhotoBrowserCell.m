@@ -10,18 +10,16 @@
 #import <XTlib.h>
 #import <Masonry/Masonry.h>
 #import "SHMLargeImgScroll.h"
+#import "WebImgModel.h"
 
 
 @interface SHMPhotoBrowserCell ()
-@property (strong, nonatomic) SHMLargeImgScroll *imgScroll ;
+@property (strong, nonatomic, readwrite)   SHMLargeImgScroll   *imgScroll;
 @end
 
 @implementation SHMPhotoBrowserCell
 
-
-
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
                
@@ -38,13 +36,15 @@
     return self;
 }
 
-
-- (void)setUrlStr:(NSString *)urlStr {
-    _urlStr = urlStr;
+- (void)setModel:(WebImgModel *)model {
+    _model = model;
     
-    [self.imgScroll setImgUrlString:urlStr];
+    switch (model.currentDisplayMode) {
+        case WebImgModelisplayMode_thumbnail: [self.imgScroll setImgUrlString:model.image]; break;
+        case WebImgModelisplayMode_origin: [self.imgScroll setImgUrlString:model.origin]; break;
+        default: break;
+    }
 }
-
 
 
 

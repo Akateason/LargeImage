@@ -11,9 +11,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSUInteger, WebImgModelisplayMode) {
+    WebImgModelisplayMode_thumbnail = 0 ,
+    WebImgModelisplayMode_origin,
+};
+
+
 @interface WebImgModel : NSObject
 @property (nonatomic,copy) NSString *image;     //thumbnail
 @property (nonatomic,copy) NSString *origin;
+
+@property (nonatomic) WebImgModelisplayMode currentDisplayMode ;
 
 - (BOOL)onlyTakeThumbnail;
 

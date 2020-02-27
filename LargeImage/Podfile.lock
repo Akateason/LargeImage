@@ -50,6 +50,9 @@ PODS:
   - SDWebImage/GIF (4.3.3):
     - FLAnimatedImage (~> 1.0)
     - SDWebImage/Core
+  - SHMDatabase (0.0.1):
+    - FMDB
+    - YYModel
   - SSZipArchive (2.2.2)
   - SVProgressHUD (2.2.5)
   - UIFontWDCustomLoader (0.1.0)
@@ -99,11 +102,14 @@ DEPENDENCIES:
   - FLAnimatedImage (~> 1.0)
   - SDWebImage (= 4.3.3)
   - SDWebImage/GIF
+  - SHMDatabase
   - XTBase
   - XTlib
   - XTlib/CustomUIs
 
 SPEC REPOS:
+  https://git.shimo.im/ios/Specs:
+    - SHMDatabase
   https://github.com/CocoaPods/Specs.git:
     - AFNetworking
     - BlocksKit
@@ -143,6 +149,7 @@ SPEC CHECKSUMS:
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
   RSKImageCropper: a446db0e8444a036b34f3c43db01b2373baa4b2a
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
+  SHMDatabase: 7c3eb63e63e2e9f1ebff2de4f0d67aa0343837e9
   SSZipArchive: fa16b8cc4cdeceb698e5e5d9f67e9558532fbf23
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   UIFontWDCustomLoader: 233f0f83e543b8f24a6299d7fc773be9d704fe22
@@ -156,6 +163,6 @@ SPEC CHECKSUMS:
   XTTable: 71154f0f7e883546d83a3b377f919369fc7d1ece
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 061913d66566902bfc269fc0b40fddeda442cc9e
+PODFILE CHECKSUM: 0e74a9a288bdaf830c2da0e223168e9871662923
 
 COCOAPODS: 1.8.4
