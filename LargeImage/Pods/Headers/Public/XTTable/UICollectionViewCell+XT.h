@@ -1,0 +1,1 @@
+../../../XTTable/TableDatasourceSeparation/XTCollection/UICollectionViewCell+XT.h

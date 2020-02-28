@@ -17,19 +17,15 @@ PODS:
   - CocoaLumberjack (3.6.1):
     - CocoaLumberjack/Core (= 3.6.1)
   - CocoaLumberjack/Core (3.6.1)
-  - FLAnimatedImage (1.0.12)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
   - Masonry (1.1.0)
   - MJRefresh (3.3.1)
   - ReactiveObjC (3.1.1)
-  - SDWebImage (4.3.3):
-    - SDWebImage/Core (= 4.3.3)
-  - SDWebImage/Core (4.3.3)
-  - SDWebImage/GIF (4.3.3):
-    - FLAnimatedImage (~> 1.0)
-    - SDWebImage/Core
+  - SDWebImage (5.5.2):
+    - SDWebImage/Core (= 5.5.2)
+  - SDWebImage/Core (5.5.2)
   - SHMDatabase (0.0.1):
     - FMDB
     - YYModel
@@ -50,15 +46,16 @@ PODS:
     - "UITableView+FDTemplateLayoutCell"
     - Valet (= 2.4.2)
     - YYModel
+  - XTTable (1.0.0):
+    - XTBase
   - YYModel (1.0.4)
 
 DEPENDENCIES:
   - BlocksKit
-  - FLAnimatedImage (~> 1.0)
-  - SDWebImage (= 4.3.3)
-  - SDWebImage/GIF
+  - SDWebImage
   - SHMDatabase
   - XTBase
+  - XTTable
 
 SPEC REPOS:
   https://git.shimo.im/ios/Specs:
@@ -66,7 +63,6 @@ SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - BlocksKit
     - CocoaLumberjack
-    - FLAnimatedImage
     - FMDB
     - Masonry
     - MJRefresh
@@ -78,17 +74,17 @@ SPEC REPOS:
     - "UITableView+FDTemplateLayoutCell"
     - Valet
     - XTBase
+    - XTTable
     - YYModel
 
 SPEC CHECKSUMS:
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   CocoaLumberjack: b17ae15142558d08bbacf69775fa10c4abbebcc9
-  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJRefresh: eeda70fbf0ad277f3178cef1cd0c3532591d6237
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
-  SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
+  SDWebImage: 4d5c027c935438f341ed33dbac53ff9f479922ca
   SHMDatabase: 7c3eb63e63e2e9f1ebff2de4f0d67aa0343837e9
   SSZipArchive: fa16b8cc4cdeceb698e5e5d9f67e9558532fbf23
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
@@ -96,8 +92,9 @@ SPEC CHECKSUMS:
   "UITableView+FDTemplateLayoutCell": 5c949b4a5059c404b442926c0e80f81d10a2d66f
   Valet: 14463ef24fab8fd5809044ecedb61484b799fdd6
   XTBase: ab6df355b34d48b6a80b1b5ba3c046600b8093a9
+  XTTable: 71154f0f7e883546d83a3b377f919369fc7d1ece
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 500caa0382a87d6fcd74a2a4a38dd2a1cc123d24
+PODFILE CHECKSUM: eff7e773b95c4e11de7ee85e6c740a42af7e114f
 
 COCOAPODS: 1.8.4
