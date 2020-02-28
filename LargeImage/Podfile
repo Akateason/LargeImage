@@ -6,7 +6,7 @@ source 'https://git.shimo.im/ios/Specs'
 
 
 target 'LargeImage' do
-  pod 'SDWebImage'
+  pod 'SDWebImage','5.4.0'
   #pod 'SDWebImage/GIF'
   #pod 'FLAnimatedImage', '~> 1.0'
   pod 'SHMDatabase'

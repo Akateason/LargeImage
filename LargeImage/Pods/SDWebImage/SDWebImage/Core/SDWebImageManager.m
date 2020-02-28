@@ -95,45 +95,19 @@ static id<SDImageLoader> _defaultImageLoader;
 }
 
 - (nullable NSString *)cacheKeyForURL:(nullable NSURL *)url {
-    return [self cacheKeyForURL:url context:nil];
+    return [self cacheKeyForURL:url cacheKeyFilter:self.cacheKeyFilter];
 }
 
-- (nullable NSString *)cacheKeyForURL:(nullable NSURL *)url context:(nullable SDWebImageContext *)context {
+- (nullable NSString *)cacheKeyForURL:(nullable NSURL *)url cacheKeyFilter:(id<SDWebImageCacheKeyFilter>)cacheKeyFilter {
     if (!url) {
         return @"";
     }
-    
-    NSString *key;
-    // Cache Key Filter
-    id<SDWebImageCacheKeyFilter> cacheKeyFilter = self.cacheKeyFilter;
-    if (context[SDWebImageContextCacheKeyFilter]) {
-        cacheKeyFilter = context[SDWebImageContextCacheKeyFilter];
-    }
+
     if (cacheKeyFilter) {
-        key = [cacheKeyFilter cacheKeyForURL:url];
+        return [cacheKeyFilter cacheKeyForURL:url];
     } else {
-        key = url.absoluteString;
+        return url.absoluteString;
     }
-    // Thumbnail Key Appending
-    NSValue *thumbnailSizeValue = context[SDWebImageContextImageThumbnailPixelSize];
-    if (thumbnailSizeValue != nil) {
-        CGSize thumbnailSize = CGSizeZero;
-#if SD_MAC
-        thumbnailSize = thumbnailSizeValue.sizeValue;
-#else
-        thumbnailSize = thumbnailSizeValue.CGSizeValue;
-#endif
-        
-        BOOL preserveAspectRatio = YES;
-        NSNumber *preserveAspectRatioValue = context[SDWebImageContextImagePreserveAspectRatio];
-        if (preserveAspectRatioValue != nil) {
-            preserveAspectRatio = preserveAspectRatioValue.boolValue;
-        }
-        NSString *transformerKey = [NSString stringWithFormat:@"Thumbnail({%f,%f},%d)", thumbnailSize.width, thumbnailSize.height, preserveAspectRatio];
-        key = SDTransformedKeyForKey(key, transformerKey);
-    }
-    
-    return key;
 }
 
 - (SDWebImageCombinedOperation *)loadImageWithURL:(NSURL *)url options:(SDWebImageOptions)options progress:(SDImageLoaderProgressBlock)progressBlock completed:(SDInternalCompletionBlock)completedBlock {
@@ -214,7 +188,8 @@ static id<SDImageLoader> _defaultImageLoader;
     // Check whether we should query cache
     BOOL shouldQueryCache = !SD_OPTIONS_CONTAINS(options, SDWebImageFromLoaderOnly);
     if (shouldQueryCache) {
-        NSString *key = [self cacheKeyForURL:url context:context];
+        id<SDWebImageCacheKeyFilter> cacheKeyFilter = context[SDWebImageContextCacheKeyFilter];
+        NSString *key = [self cacheKeyForURL:url cacheKeyFilter:cacheKeyFilter];
         @weakify(operation);
         operation.cacheOperation = [self.imageCache queryImageForKey:key options:options context:context completion:^(UIImage * _Nullable cachedImage, NSData * _Nullable cachedData, SDImageCacheType cacheType) {
             @strongify(operation);
@@ -328,7 +303,8 @@ static id<SDImageLoader> _defaultImageLoader;
     if (context[SDWebImageContextOriginalStoreCacheType]) {
         originalStoreCacheType = [context[SDWebImageContextOriginalStoreCacheType] integerValue];
     }
-    NSString *key = [self cacheKeyForURL:url context:context];
+    id<SDWebImageCacheKeyFilter> cacheKeyFilter = context[SDWebImageContextCacheKeyFilter];
+    NSString *key = [self cacheKeyForURL:url cacheKeyFilter:cacheKeyFilter];
     id<SDImageTransformer> transformer = context[SDWebImageContextImageTransformer];
     id<SDWebImageCacheSerializer> cacheSerializer = context[SDWebImageContextCacheSerializer];
     
@@ -377,7 +353,8 @@ static id<SDImageLoader> _defaultImageLoader;
     if (context[SDWebImageContextStoreCacheType]) {
         storeCacheType = [context[SDWebImageContextStoreCacheType] integerValue];
     }
-    NSString *key = [self cacheKeyForURL:url context:context];
+    id<SDWebImageCacheKeyFilter> cacheKeyFilter = context[SDWebImageContextCacheKeyFilter];
+    NSString *key = [self cacheKeyForURL:url cacheKeyFilter:cacheKeyFilter];
     id<SDImageTransformer> transformer = context[SDWebImageContextImageTransformer];
     id<SDWebImageCacheSerializer> cacheSerializer = context[SDWebImageContextCacheSerializer];
     BOOL shouldTransformImage = originalImage && (!originalImage.sd_isAnimated || (options & SDWebImageTransformAnimatedImage)) && transformer;

@@ -77,17 +77,24 @@
 
 - (void)cleanAll {
 //        clear sd default
-    [SDWebImageManager.sharedManager.imageCache clearMemory];
-    [SDWebImageManager.sharedManager.imageCache clearDiskOnCompletion:^{
-
+//    [SDWebImageManager.sharedManager.imageCache clearMemory];
+//    [SDWebImageManager.sharedManager.imageCache clearDiskOnCompletion:^{
+//
+//    }];
+    [SDWebImageManager.sharedManager.imageCache clearWithCacheType:(SDImageCacheTypeAll) completion:^{
+        
     }];
     
 //        clear large
-    [SDWebImageManager.sharedManagerForLargeImage.imageCache clearMemory];
-    [SDWebImageManager.sharedManagerForLargeImage.imageCache clearDiskOnCompletion:^{
-
+//    [SDWebImageManager.sharedManagerForLargeImage.imageCache clearMemory];
+//    [SDWebImageManager.sharedManagerForLargeImage.imageCache clearDiskOnCompletion:^{
+//
+//    }];
+    [SDWebImageManager.sharedManagerForLargeImage.imageCache clearWithCacheType:(SDImageCacheTypeAll) completion:^{
+        
     }];
-    
+
+        
 //    drop WebImgModel
     [WebImgModel shmdb_dropTable];
         

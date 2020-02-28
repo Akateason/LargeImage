@@ -75,11 +75,6 @@
     [self resetScrollToOrigin];
     
     self.largeImgView.hidden = NO;
-//    [UIView animateWithDuration:3 delay:0 options:(UIViewAnimationOptionCurveLinear) animations:^{
-//        self.imageView.alpha = 0.2;
-//    } completion:^(BOOL finished) {
-//        self.imageView.alpha = 1;
-//    }];
     NSLog(@"正在加载大图");
     if (self.currentDisplayMode == WebImgModelisplayMode_origin) [self.callback largeImgloadingFinished:self.myModel] ;
 }
@@ -102,8 +97,9 @@
     self.maximumZoomScale = 3;
     self.minimumZoomScale = 1;
     
-    FLAnimatedImage *aImage = [FLAnimatedImage animatedImageWithGIFData:data];
-    self.imageView.animatedImage = aImage;
+    SDAnimatedImage *aImage = [SDAnimatedImage imageWithData:data];
+    self.imageView.image = aImage;
+//    self.imageView.animatedImage = aImage;
     [self resetScrollToOrigin];
 }
 
@@ -156,9 +152,9 @@ static const float kSIDE_ZOOMTORECT = 80.0f;
     return _largeImgView;
 }
 
-- (FLAnimatedImageView *)imageView {
+- (SDAnimatedImageView *)imageView {
     if (!_imageView) {
-        _imageView = [[FLAnimatedImageView alloc] initWithFrame:self.bounds];
+        _imageView = [[SDAnimatedImageView alloc] initWithFrame:self.bounds];
         _imageView.contentMode = UIViewContentModeScaleAspectFit;
         if (!_imageView.superview) [self addSubview:_imageView];
     }
@@ -187,9 +183,10 @@ static const float kSIDE_ZOOMTORECT = 80.0f;
 }
 
 - (void)clear {
-    self.imageView.animatedImage = nil;
+//    self.imageView.image = nil;
+//    self.imageView.animatedImage = nil;
 //    self.imageView.alpha = 1;
-        
+    
     self.largeImgView.image = nil;
 }
 
@@ -208,8 +205,12 @@ static const float kSIDE_ZOOMTORECT = 80.0f;
     int lev = ceil(log2(1 / scale));
     if (lev >= 4) {
         //TODO: 分片压缩
-        UIImage *imgCompressed = [SHMLargeImageCompressUtil scaledImageFromData:data width:APP_WIDTH * (lev+1)] ;
-        if (completion) completion(imgCompressed);
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            UIImage *imgCompressed = [SHMLargeImageCompressUtil scaledImageFromData:data width:APP_WIDTH * (lev+1)] ;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (completion) completion(imgCompressed);
+            });
+        });
     } else {
         if (completion) completion(image);
     }
@@ -249,7 +250,7 @@ static const float kSIDE_ZOOMTORECT = 80.0f;
     
     @weakify(self)
     [[SDWebImageManager sharedManagerForLargeImage] loadImageWithURL:[NSURL URLWithString:urlString]
-                                                             options:SDWebImageScaleDownLargeImages
+                                                             options:SDWebImageAvoidDecodeImage | SDWebImageScaleDownLargeImages
                                                             progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
         
         @strongify(self)

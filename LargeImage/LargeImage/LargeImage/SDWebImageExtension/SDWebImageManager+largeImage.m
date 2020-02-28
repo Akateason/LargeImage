@@ -21,12 +21,13 @@
 
 - (nonnull instancetype)setup {
     SDImageCache *cache = [[SDImageCache alloc] initWithNamespace:@"largeImage"];
-    cache.config.shouldDecompressImages = NO;
+//    cache.config.shouldDecompressImages = NO;
     cache.config.shouldCacheImagesInMemory = NO;
     SDWebImageDownloader *downloader = [[SDWebImageDownloader alloc] init];
-    downloader.shouldDecompressImages = NO;
-    downloader.maxConcurrentDownloads = 3;
-    return [self initWithCache:cache downloader:downloader];
+//    downloader.shouldDecompressImages = NO;
+//    downloader.maxConcurrentDownloads = 3;
+//    return [self initWithCache:cache downloader:downloader];
+    return [self initWithCache:cache loader:downloader];
 }
 
 @end

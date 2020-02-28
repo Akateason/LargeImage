@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "SHMTiledLargeImageView.h"
-#import <FLAnimatedImageView+WebCache.h>
 #import "WebImgModel.h"
+#import <SDWebImage.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SHMLargeImgScroll : UIScrollView
 @property (weak, nonatomic)      id<SHMLargeImgScrollCallback>  callback;
 @property (strong, nonatomic)    SHMTiledLargeImageView         *largeImgView;
-@property (strong, nonatomic)    FLAnimatedImageView            *imageView;
+@property (strong, nonatomic)    SDAnimatedImageView            *imageView;
 
 
 - (void)goDownloadThumbnail:(WebImgModel *)model ;

@@ -19,7 +19,6 @@
 @interface SDAnimatedImageView () <CALayerDelegate> {
     BOOL _initFinished; // Extra flag to mark the `commonInit` is called
     NSRunLoopMode _runLoopMode;
-    NSUInteger _maxBufferSize;
     double _playbackRate;
 }
 
@@ -154,9 +153,6 @@
         // RunLoop Mode
         self.player.runLoopMode = self.runLoopMode;
         
-        // Max Buffer Size
-        self.player.maxBufferSize = self.maxBufferSize;
-        
         // Play Rate
         self.player.playbackRate = self.playbackRate;
         
@@ -170,13 +166,12 @@
         };
         self.player.animationLoopHandler = ^(NSUInteger loopCount) {
             @strongify(self);
+            self.currentLoopCount = loopCount;
             // Progressive image reach the current last frame index. Keep the state and pause animating. Wait for later restart
             if (self.isProgressive) {
-                NSUInteger lastFrameIndex = self.player.totalFrameCount - 1;
+                NSUInteger lastFrameIndex = self.player.totalFrameCount;
                 [self.player seekToFrameAtIndex:lastFrameIndex loopCount:0];
                 [self.player pausePlaying];
-            } else {
-                self.currentLoopCount = loopCount;
             }
         };
         
@@ -209,16 +204,6 @@
 + (NSString *)defaultRunLoopMode {
     // Key off `activeProcessorCount` (as opposed to `processorCount`) since the system could shut down cores in certain situations.
     return [NSProcessInfo processInfo].activeProcessorCount > 1 ? NSRunLoopCommonModes : NSDefaultRunLoopMode;
-}
-
-- (void)setMaxBufferSize:(NSUInteger)maxBufferSize
-{
-    _maxBufferSize = maxBufferSize;
-    self.player.maxBufferSize = maxBufferSize;
-}
-
-- (NSUInteger)maxBufferSize {
-    return _maxBufferSize; // Defaults to 0
 }
 
 - (void)setPlaybackRate:(double)playbackRate
